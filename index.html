@@ -1568,38 +1568,389 @@
         }
 
         /* MOBILE */
-        @media(max-width:768px) {
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE — LANDING PAGE
+           Breakpoints: 1024px (tablet), 768px (mobile), 480px (small)
+        ══════════════════════════════════════════════════ */
 
+        /* ── Hamburger button (hidden on desktop) ── */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: transparent;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--ink2);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ── Mobile menu drawer ── */
+        .nav-mobile-drawer {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: rgba(11, 22, 41, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 99;
+            animation: slideDown 0.2s ease;
+        }
+
+        .nav-mobile-drawer.open {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-mobile-link {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--ink2);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-weight: 500;
+        }
+
+        .nav-mobile-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .nav-mobile-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 8px 0;
+        }
+
+        .nav-mobile-btns {
+            display: flex;
+            gap: 8px;
+            padding: 4px 0;
+        }
+
+        .nav-mobile-btns .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* ── Tablet (≤1024px) ── */
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 24px;
+            }
+
+            .container {
+                padding: 0 24px;
+            }
+
+            .hero-inner {
+                gap: 36px;
+            }
+
+            .hero-right {
+                height: 420px;
+            }
+
+            .hcard-main {
+                width: 280px;
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .deals-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .stat-val {
+                font-size: 32px;
+            }
+
+            .cta-inner {
+                padding: 48px 40px;
+            }
+        }
+
+        /* ── Mobile (≤768px) ── */
+        @media (max-width: 768px) {
+
+            /* nav */
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .nav-right .btn {
+                display: none;
+            }
+
+            .nav-right .lang-switcher {
+                margin-right: 0;
+            }
+
+            /* container */
+            .container {
+                padding: 0 16px;
+            }
+
+            /* hero */
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 0;
+                padding: 48px 0 40px;
+            }
+
+            .hero-right {
+                display: none;
+            }
+
+            .hero-h1 {
+                font-size: clamp(32px, 9vw, 48px);
+            }
+
+            .hero-sub {
+                font-size: 15px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-ctas .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-stats {
+                gap: 8px !important;
+                flex-wrap: nowrap !important;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .hero-stat {
+                flex: 1;
+                text-align: center;
+            }
+
+            .hero-stat-val {
+                font-size: 16px !important;
+            }
+
+            .hero-stat-label {
+                font-size: 8.5px !important;
+                margin-top: 2px;
+                line-height: 1.2;
+            }
+
+            .hero-divider {
+                display: none;
+            }
+
+            /* sections */
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-header {
+                margin-bottom: 36px;
+            }
+
+            .section-title {
+                font-size: clamp(24px, 6vw, 32px);
+            }
+
+            .section-sub {
+                font-size: 14px;
+            }
+
+            /* grids → single column */
             .hero-inner,
             .case-grid,
             .deals-grid,
             .features-panel,
             .feat-panel.active,
             .hiw-grid,
-            .testi-grid,
-            .footer-grid {
-                grid-template-columns: 1fr
+            .testi-grid {
+                grid-template-columns: 1fr;
             }
 
+            /* stats bar */
             .stats-inner {
-                grid-template-columns: 1fr 1fr
+                grid-template-columns: repeat(4, 1fr) !important;
             }
 
-            .hero-right {
-                display: none
+            .stat-item {
+                padding: 16px 4px !important;
+                border-right: 1px solid var(--border) !important;
             }
 
-            .container {
-                padding: 0 20px
+            .stat-item:last-child {
+                border-right: none !important;
             }
 
+            .stat-val {
+                font-size: 16px !important;
+            }
+
+            .stat-label {
+                font-size: 9px !important;
+                line-height: 1.2;
+            }
+
+            .stat-sub {
+                display: none !important;
+            }
+
+            /* footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .footer {
+                padding: 48px 0 24px;
+            }
+
+            /* features tab */
+            .feat-tabs {
+                padding: 0 16px;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .feat-tab {
+                padding: 16px 16px;
+                font-size: 13px;
+            }
+
+            .feat-panels {
+                padding: 24px 16px 16px;
+            }
+
+            /* how it works */
+            .hiw-grid {
+                border-radius: 14px;
+            }
+
+            .hiw-card {
+                padding: 28px 20px;
+            }
+
+            .hiw-arrow {
+                display: none;
+            }
+
+            /* two-col header */
             .two-col-header {
                 flex-direction: column;
-                align-items: flex-start
+                align-items: flex-start;
+                gap: 12px;
             }
 
-            .nav-links {
-                display: none
+            /* cta */
+            .cta-inner {
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+
+            .cta-h2 {
+                font-size: clamp(24px, 7vw, 36px);
+            }
+
+            .cta-sub {
+                font-size: 14px;
+            }
+
+            .cta-btns {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta-btns .btn {
+                justify-content: center;
+            }
+
+            /* chat widget */
+            .chat-bubble {
+                width: calc(100vw - 32px);
+                right: -8px;
+            }
+        }
+
+        /* ── Small phones (≤480px) ── */
+        @media (max-width: 480px) {
+            .hero-h1 {
+                font-size: 30px;
+            }
+
+            /* stats bar kept as 4-column row */
+
+            .logos-band::before,
+            .logos-band::after {
+                width: 60px;
+            }
+
+            .nav-right .lang-switcher {
+                display: none;
             }
         }
 
@@ -7023,6 +7374,66 @@
             }
         }
 
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE — LANDING PAGE (v2 -l suffix classes)
+        ══════════════════════════════════════════════════ */
+
+        /* ── Hamburger (landing nav) ── */
+        .nav-hamburger-l {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: transparent;
+        }
+
+        .nav-hamburger-l span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--ink2);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-hamburger-l.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-hamburger-l.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger-l.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-inner-l {
+                gap: 36px;
+            }
+
+            .hero-right-l {
+                height: 420px;
+            }
+
+            .case-grid-l {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .deals-grid-l {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid-l {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
         @media(max-width:768px) {
 
             .hero-inner-l,
@@ -7041,6 +7452,466 @@
 
             .nav-links-l {
                 display: none;
+            }
+
+            .nav-hamburger-l {
+                display: flex;
+            }
+        }
+
+        @media(max-width:480px) {
+            .stats-inner-l {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE — INVESTOR DASHBOARD (#app-view)
+        ══════════════════════════════════════════════════ */
+
+        /* ── Sidebar overlay toggle (mobile) ── */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 98;
+            backdrop-filter: blur(2px);
+        }
+
+        .sidebar-overlay.open {
+            display: block;
+        }
+
+        /* ── Mobile topbar menu button ── */
+        .topbar-menu-btn {
+            display: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: var(--card);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ── Mobile bottom navigation (investor dashboard) ── */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--navy2);
+            border-top: 1px solid var(--border);
+            padding: 8px 0 env(safe-area-inset-bottom, 8px);
+            z-index: 200;
+        }
+
+        .mobile-bottom-nav-inner {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .mbn-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 6px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+            min-width: 52px;
+        }
+
+        .mbn-item:active {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .mbn-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .mbn-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--ink3);
+            letter-spacing: 0.2px;
+        }
+
+        .mbn-item.active .mbn-icon {
+            filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.6));
+        }
+
+        /* ── Dashboard Specifics ── */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+        }
+
+        .dashboard-header-stats {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dashboard-quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+
+        /* ── Desktop default: investor-pages aligns with sidebar ── */
+        #investor-pages {
+            margin-left: 280px;
+        }
+
+        /* ── Tablet (≤1024px) — sidebar narrows ── */
+        @media (max-width: 1024px) {
+            #app-view .sidebar {
+                width: 220px;
+                padding: 28px 20px;
+            }
+
+            #app-view .main-content {
+                margin-left: 220px;
+                padding: 32px 32px;
+            }
+
+            #investor-pages {
+                margin-left: 220px;
+            }
+
+            .dashboard-quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .profile-cover-banner {
+            background: linear-gradient(135deg, rgba(30, 86, 214, 0.4) 0%, rgba(124, 58, 237, 0.4) 100%), var(--navy2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            gap: 24px;
+            min-height: 180px;
+        }
+
+        .profile-main-grid,
+        .set-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+            align-items: start;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        .profile-cover-banner {
+            background: linear-gradient(135deg, rgba(30, 86, 214, 0.4) 0%, rgba(124, 58, 237, 0.4) 100%), var(--navy2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            gap: 24px;
+            min-height: 180px;
+        }
+
+        .profile-main-grid,
+        .set-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+            align-items: start;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        /* ── Mobile (≤768px) — sidebar becomes off-canvas drawer ── */
+        @media (max-width: 768px) {
+
+            /* Sidebar: fixed off-canvas, slides in */
+            #app-view .sidebar {
+                width: 260px;
+                transform: translateX(-100%);
+                transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 200;
+            }
+
+            #app-view .sidebar.sidebar-open {
+                transform: translateX(0);
+                box-shadow: 8px 0 32px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Main content: full width, add bottom padding for bottom nav */
+            #app-view .main-content {
+                margin-left: 0;
+                padding: 16px 16px 90px;
+            }
+
+            /* investor-pages margin override on mobile */
+            #investor-pages {
+                margin-left: 0 !important;
+            }
+
+            /* Topbar: tighter, show menu button */
+            .topbar {
+                padding: 10px 16px;
+            }
+
+            .topbar-menu-btn {
+                display: flex;
+            }
+
+            .topbar-search {
+                width: 160px;
+            }
+
+            /* Show bottom nav */
+            .mobile-bottom-nav {
+                display: block;
+            }
+
+            /* Sidebar overlay */
+            .sidebar-overlay {
+                cursor: pointer;
+            }
+
+            /* Page content */
+            .page-content {
+                padding: 16px;
+            }
+
+            /* Investor grids → mobile */
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .deal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Dashboard Layout Tweaks */
+            .dashboard-header {
+                flex-direction: column;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 22px !important;
+                line-height: 1.3;
+            }
+
+            .dashboard-header-stats {
+                width: 100%;
+                gap: 8px;
+            }
+
+            .dashboard-header-stats>div {
+                flex: 1;
+                padding: 12px 10px !important;
+            }
+
+            .dashboard-header-stats>div>div:first-child {
+                font-size: 10px !important;
+            }
+
+            .dashboard-header-stats>div>div:last-child {
+                font-size: 18px !important;
+            }
+
+            .dashboard-quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                margin-bottom: 32px;
+            }
+
+            /* Deal Card Mobile Adjustments */
+            .deal-card-lux {
+                padding: 16px;
+            }
+
+            .deal-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                padding: 12px;
+            }
+
+            /* Set/AI panels */
+            .set-section {
+                padding: 16px !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+            }
+
+            .set-grid-2 {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Topbar right — hide search on very small */
+            .topbar-right .topbar-search {
+                display: none;
+            }
+
+            /* inv-page topbar row */
+            .topbar-right {
+                gap: 8px;
+            }
+
+            /* Score page columns */
+            .inv-score-cols {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Dealing room AI Matching */
+            div[style*="grid-template-columns: 1fr 340px"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Settings & Profile grids */
+            .profile-main-grid,
+            .set-main-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .profile-cover-banner {
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                padding: 24px !important;
+                min-height: auto !important;
+                gap: 16px !important;
+            }
+
+            .profile-bio-title,
+            .profile-bio-meta {
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+            }
+
+            .topbar-sub {
+                display: none !important;
+            }
+
+            .table-responsive .data-table {
+                min-width: 650px !important;
+            }
+
+            .set-tag-group,
+            .chip-row {
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                padding-bottom: 8px;
+                /* Breathing room for scrollbar */
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .set-tag-group::-webkit-scrollbar,
+            .chip-row::-webkit-scrollbar {
+                display: none;
+                /* Chrome/Safari */
+            }
+
+            .set-tag,
+            .chip {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            /* Deal Room Filters */
+            .deal-room-filters {
+                flex-direction: column;
+                gap: 12px !important;
+            }
+
+            .deal-room-chips {
+                min-width: 100%;
+            }
+
+            .deal-room-sort {
+                width: 100%;
+            }
+
+            .deal-room-sort .form-select {
+                flex: 1;
+            }
+
+            /* AIM panel right column stacks below */
+            div[style*="grid-template-columns: 2fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Stat cards grid */
+            .aim-stat-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ── Small phones (≤480px) ── */
+        @media (max-width: 480px) {
+            #app-view .main-content {
+                padding: 12px 12px 90px;
+            }
+
+            .page-content {
+                padding: 12px;
+            }
+
+            .topbar {
+                padding: 8px 12px;
+            }
+
+            .topbar-title {
+                font-size: 14px;
+            }
+
+            .mbn-item {
+                padding: 6px 8px;
+                min-width: 44px;
+            }
+
+            .mbn-label {
+                font-size: 9px;
+            }
+
+            .deal-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .aim-stat-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -7082,8 +7953,30 @@
                     <button class="btn btn-ghost" data-t="nav_login" onclick="showLogin()">Đăng nhập</button>
                     <button class="btn btn-primary" data-t="nav_start_free" onclick="showToastT('auto_t_279')">Bắt đầu
                         miễn phí</button>
+                    <!-- Hamburger button (mobile only) -->
+                    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
                 </div>
             </nav>
+
+            <!-- ══ MOBILE NAV DRAWER ══ -->
+            <div class="nav-mobile-drawer" id="nav-mobile-drawer">
+                <span class="nav-mobile-link" data-t="nav_features" onclick="mobileNavGo('#features')">🎯 Tính
+                    năng</span>
+                <span class="nav-mobile-link" data-t="nav_dealing_room" onclick="mobileNavGo('#deals')">🔍 Dealing
+                    Room</span>
+                <span class="nav-mobile-link" data-t="nav_how" onclick="mobileNavGo('#how')">⚙️ Cách hoạt động</span>
+                <span class="nav-mobile-link" data-t="nav_testimonials" onclick="mobileNavGo('#testimonials')">💬 Case
+                    Studies</span>
+                <div class="nav-mobile-divider"></div>
+                <div class="nav-mobile-btns">
+                    <button class="btn btn-ghost" data-t="nav_login" onclick="showLogin(); toggleMobileNav()">Đăng
+                        nhập</button>
+                    <button class="btn btn-primary" data-t="nav_start_free"
+                        onclick="showToastT('auto_t_279'); toggleMobileNav()">Bắt đầu miễn phí</button>
+                </div>
+            </div>
 
             <!-- ══ HERO ══ -->
             <section class="hero" id="hero">
@@ -7112,7 +8005,7 @@
                             <div class="hero-ctas">
                                 <button class="btn btn-primary btn-lg" data-t="hero_cta_score"
                                     onclick="showToastT('auto_t_280')">
-                                    ⚡ Chấm điểm AI miễn phí
+                                    Chấm điểm AI miễn phí
                                 </button>
                                 <button class="btn btn-gold btn-lg" data-t="hero_cta_explore"
                                     onclick="showToastT('auto_t_281')">
@@ -8234,7 +9127,10 @@
 
         <!-- ─── APP / INVESTOR VIEW ─── -->
         <div id="app-view">
-            <div class="sidebar">
+            <!-- Sidebar overlay (mobile tap-to-close) -->
+            <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+            <div class="sidebar" id="app-sidebar">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
                     <div style="font-family:var(--font-display); font-size:22px; font-weight:800; cursor:pointer;"
                         onclick="logoutToLanding()"><img src="./finister-logo.png" height="50" class="logo-img"
@@ -8289,7 +9185,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><!-- end sidebar -->
+
+            <!-- Mobile bottom nav -->
+            <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+                <div class="mobile-bottom-nav-inner">
+                    <div class="mbn-item active" id="mbn-dashboard" onclick="mobileNav('dashboard', this)">
+                        <span class="mbn-icon">📋</span>
+                        <span class="mbn-label">Dashboard</span>
+                    </div>
+                    <div class="mbn-item" id="mbn-dealroom" onclick="mobileNav('dealroom', this)">
+                        <span class="mbn-icon">🔍</span>
+                        <span class="mbn-label">Deals</span>
+                    </div>
+                    <div class="mbn-item" id="mbn-messages-inv" onclick="mobileNav('messages-inv', this)">
+                        <span class="mbn-icon">💬</span>
+                        <span class="mbn-label">Tin nhắn</span>
+                    </div>
+                    <div class="mbn-item" id="mbn-score" onclick="mobileNav('score', this)">
+                        <span class="mbn-icon">⚡</span>
+                        <span class="mbn-label">AI Score</span>
+                    </div>
+                    <div class="mbn-item" id="mbn-more" onclick="toggleSidebar()">
+                        <span class="mbn-icon">⋯</span>
+                        <span class="mbn-label">More</span>
+                    </div>
+                </div>
+            </nav>
 
             <div class="main-content">
 
@@ -8617,7 +9539,7 @@
         </div><!-- end #app-view -->
 
         <!-- ═══════ INVESTOR SME PAGES (shown after login, when navigating to app sections) ═══════ -->
-        <div id="investor-pages" style="display:none; margin-left:280px; min-height:100vh;">
+        <div id="investor-pages" style="display:none; min-height:100vh;">
             <div style="position:relative;">
                 <!-- ════════════════════════════════════════════
      PAGE: DEALING ROOM
@@ -8644,8 +9566,9 @@
                     <div class="page-content">
 
                         <!-- Filters -->
-                        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
-                            <div style="flex:1;">
+                        <div class="deal-room-filters"
+                            style="display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+                            <div class="deal-room-chips" style="flex:1; width:100%;">
                                 <div class="chip-row">
                                     <button class="chip active"><span data-t="auto_t_011">Tất cả (127)</span></button>
                                     <button class="chip" onclick="chipClick(this)" data-t="auto_ext_233">Startup
@@ -8672,7 +9595,7 @@
                                     <button class="chip" onclick="chipClick(this)" data-t="auto_ext_241">F&B</button>
                                 </div>
                             </div>
-                            <div style="display:flex;gap:8px;">
+                            <div class="deal-room-sort" style="display:flex;gap:8px;">
                                 <select class="form-select" style="width:160px;font-size:12.5px;">
                                     <option data-t="auto_ext_242">Sort: Match Score</option>
                                     <option data-t="auto_ext_243">Sort: AFS Score</option>
@@ -10243,7 +11166,7 @@
             <div id="inv-page-pitchdeck" class="inv-page">
                 <div class="topbar">
                     <div>
-                        <div class="topbar-title" data-t="auto_ext_366">🤖 AI Pitch Deck Generator</div>
+                        <div class="topbar-title" data-t="auto_ext_366">AI Pitch Deck Generator</div>
                         <div class="topbar-sub"><span data-t="auto_t_104">Tự động tạo Pitch Deck, Business Plan & Dự
                                 phóng <span data-t="auto_t_109">Tài chính</span> chuẩn ILPA
                                 v2.0 trong 60 giây</span></div>
@@ -10348,8 +11271,7 @@
                                             data-t="auto_t_112"><span data-t="auto_t_196">Mô tả</span> ngắn về
                                             sản phẩm (1-2 câu) *</span></label>
                                     <textarea class="form-input" rows="3" placeholder="Mô tả giải pháp..."
-                                        data-t="auto_t_113"
-                                        style="line-height: 1.5; font-family: inherit;">Nền tảng thanh toán B2B cho SME Việt Nam, tích hợp đa ngân hàng và quản lý dòng tiền thời gian thực, phục vụ 1,200+ doanh nghiệp trên 15 tỉnh thành.</textarea>
+                                        data-t="auto_t_113" style="line-height: 1.5; font-family: inherit;"></textarea>
                                 </div>
 
                                 <div class="grid-2" style="gap:16px; margin-bottom:20px;">
@@ -10452,8 +11374,7 @@
                                             </div>
                                         </div>
                                         <button class="btn btn-gold btn-sm" onclick="showToastT('auto_t_301')"><span
-                                                data-t="auto_t_124">🔒
-                                                Tải xuống</span></button>
+                                                data-t="auto_t_124">Tải xuống</span></button>
                                     </div>
 
                                     <div
@@ -10470,8 +11391,7 @@
                                             </div>
                                         </div>
                                         <button class="btn btn-gold btn-sm" onclick="showToastT('auto_t_302')"><span
-                                                data-t="auto_t_124">🔒
-                                                Tải xuống</span></button>
+                                                data-t="auto_t_124">Tải xuống</span></button>
                                     </div>
                                 </div>
 
@@ -10480,7 +11400,7 @@
                                     style="padding:14px; background:rgba(212,168,67,0.06); border:1px solid rgba(212,168,67,0.15); border-radius:8px;">
                                     <div
                                         style="font-size:13px; font-weight:700; color:var(--gold2); margin-bottom:6px;">
-                                        <span data-t="auto_t_127">🔓 Mở khóa trọn bộ tài liệu (Paywall Export)</span>
+                                        <span data-t="auto_t_127">Mở khóa trọn bộ tài liệu (Paywall Export)</span>
                                     </div>
                                     <div
                                         style="font-size:11.5px; color:var(--ink3); margin-bottom:12px; line-height:1.4;">
@@ -10497,7 +11417,7 @@
                             <!-- Pitch Deck Analytics (Phase 2) -->
                             <div class="card" style="border-top: 3px solid var(--purple); margin-bottom: 0;">
                                 <div style="font-size:13px; font-weight:600; color:white; margin-bottom:4px;"><span
-                                        data-t="auto_t_130">📊 Pitch
+                                        data-t="auto_t_130">Pitch
                                         Deck Analytics (Hoạt động của <span data-t="auto_t_182">Nhà đầu
                                             tư</span>)</span></div>
                                 <div style="font-size:11.5px; color:var(--ink3); margin-bottom:16px;"><span
@@ -10574,8 +11494,7 @@
 ════════════════════════════════════════════ -->
             <div id="inv-page-profile" class="inv-page">
                 <!-- Cover Banner -->
-                <div
-                    style="background: linear-gradient(135deg, rgba(30, 86, 214, 0.4) 0%, rgba(124, 58, 237, 0.4) 100%), var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 40px; margin-bottom: 24px; position: relative; overflow: hidden; display: flex; align-items: flex-end; gap: 24px; min-height: 180px;">
+                <div class="profile-cover-banner">
                     <!-- Banner Absolute Glows -->
                     <div
                         style="position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; background: var(--blue); filter: blur(100px); opacity: 0.15; pointer-events: none;">
@@ -10589,7 +11508,7 @@
 
                     <!-- Profile Bio Info -->
                     <div style="z-index: 1;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;" class="profile-bio-title">
                             <h1 style="font-size: 26px; font-weight: 800; color: white; margin: 0;"
                                 data-t="auto_ext_383">Jean Kang</h1>
                             <span
@@ -10601,7 +11520,7 @@
                         <div style="font-size: 14.5px; color: var(--ink2); font-weight: 500; margin-bottom: 6px;"
                             data-t="auto_ext_385">
                             Managing Director @ Viet Capital Partners (VCC)</div>
-                        <div style="font-size: 12.5px; color: var(--ink3); display: flex; gap: 16px;">
+                        <div style="font-size: 12.5px; color: var(--ink3); display: flex; gap: 16px;" class="profile-bio-meta">
                             <span data-t="auto_ext_386">📍 Ho Chi Minh City, VN</span>
                             <span data-t="auto_ext_387">📧 jean.kang@vcc.com</span>
                         </div>
@@ -10628,7 +11547,7 @@
                         style="padding: 20px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; gap: 16px;">
                         <div
                             style="font-size: 28px; background: rgba(16,185,129,0.1); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            🤝</div>
+                        </div>
                         <div>
                             <div style="font-size: 11px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;"
                                 data-t="auto_ext_390">
@@ -10642,7 +11561,7 @@
                         style="padding: 20px; background: var(--navy2); border: 1px solid var(--border); display: flex; align-items: center; gap: 16px;">
                         <div
                             style="font-size: 28px; background: rgba(212,168,67,0.1); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                            🎯</div>
+                        </div>
                         <div>
                             <div style="font-size: 11px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;"
                                 data-t="auto_ext_392">
@@ -10655,7 +11574,7 @@
                 </div>
 
                 <!-- Profile Dual Columns Layout -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+                <div class="profile-main-grid">
                     <!-- Left Column: About & Mandates Preferences -->
                     <div style="display: flex; flex-direction: column; gap: 20px;">
                         <!-- About Card -->
@@ -10699,7 +11618,7 @@
                             style="background: var(--navy2); padding: 24px; border: 1px solid var(--border);">
                             <h3
                                 style="font-size: 16px; color: white; margin-top: 0; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                                <span>📊</span> <span data-t="auto_t_140">Tiêu chí đầu tư (Thesis Preferences)</span>
+                                <span data-t="auto_t_140">Tiêu chí đầu tư (Thesis Preferences)</span>
                             </h3>
                             <div style="display:flex; flex-direction:column; gap:16px;">
                                 <div>
@@ -10756,7 +11675,7 @@
                                 $</div>
                             <h3
                                 style="font-size: 16px; color: white; margin-top: 0; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                                <span>💳</span> <span data-t="auto_t_143">Ví đầu tư ký quỹ (VCC Funding Wallet)</span>
+                                <span data-t="auto_t_143">Ví đầu tư ký quỹ (VCC Funding Wallet)</span>
                             </h3>
                             <div
                                 style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px;">
@@ -10786,7 +11705,7 @@
                             style="background: var(--navy2); padding: 24px; border: 1px solid var(--border);">
                             <h3
                                 style="font-size: 16px; color: white; margin-top: 0; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                                <span>🔒</span> <span data-t="auto_t_148">Bảo mật tài khoản (Security Console)</span>
+                                <span data-t="auto_t_148">Bảo mật tài khoản (Security Console)</span>
                             </h3>
                             <div style="display: flex; flex-direction: column; gap: 12px;">
                                 <div
@@ -10827,31 +11746,28 @@
             <div id="inv-page-dashboard" class="inv-page">
                 <div class="topbar">
                     <div>
-                        <div class="topbar-title" data-t="auto_ext_404">📈 Dashboard</div>
+                        <div class="topbar-title" data-t="auto_ext_404">Dashboard</div>
                         <div class="topbar-sub" data-t="auto_ext_405">Tổng quan hoạt động · <span
                                 data-t="auto_t_055">Cập nhật</span>
                             05/07/2026</div>
                     </div>
                     <div class="topbar-right">
-                        <button class="btn btn-ghost btn-sm"><span data-t="auto_t_155">📥 Export báo cáo</span></button>
+                        <button class="btn btn-ghost btn-sm"><span data-t="auto_t_155">Export báo cáo</span></button>
                         <button class="btn btn-primary btn-sm" onclick="goInvestorPage('dealroom', null)"><span
-                                data-t="auto_t_156">+ Đăng
-                                Deal
-                                mới</span></button>
+                                data-t="auto_t_156">Đăng Deal mới</span></button>
                     </div>
                 </div>
                 <div class="page-content">
 
                     <!-- SECTION 1: OVERVIEW ANALYTICS (Nội dung Overview ở trên) -->
-                    <header
-                        style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:48px;">
+                    <header class="dashboard-header">
                         <div>
                             <h1 style="font-family:var(--font-display); font-size:32px;" data-t="welcome_message">
                                 Chào Jean, mừng bạn quay lại.</h1>
                             <p style="color:var(--ink2);" data-t="welcome_sub">Đây là các cơ hội đầu tư khớp với tiêu
                                 chí của bạn.</p>
                         </div>
-                        <div style="display:flex; gap:12px;">
+                        <div class="dashboard-header-stats">
                             <div
                                 style="background:var(--navy2); padding:10px 20px; border-radius:10px; border:1px solid var(--border); text-align:center;">
                                 <div style="font-size:11px; color:var(--ink3); font-weight:700; letter-spacing:1px;"
@@ -10874,10 +11790,9 @@
                     </header>
 
                     <!-- QUICK INSIGHTS -->
-                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-bottom:48px;">
+                    <div class="dashboard-quick-stats">
                         <div class="card"
                             style="background:linear-gradient(135deg, rgba(30,86,214,0.1), transparent); border: 1px solid rgba(30,86,214,0.2); padding:20px; margin-bottom: 0;">
-                            <div style="font-size:24px; margin-bottom:12px;">📈</div>
                             <div style="font-size:11px; color:var(--ink3); text-transform:uppercase; font-weight:700;"
                                 data-t="auto_ext_408">
                                 Portfolio Value</div>
@@ -11185,7 +12100,8 @@
                                     Đầu Tư</span></div>
                             <button class="btn btn-ghost btn-sm"><span data-t="auto_t_181">Xem tất cả</span></button>
                         </div>
-                        <table class="data-table">
+                        <div class="table-responsive">
+                            <table class="data-table">
                             <thead>
                                 <tr>
                                     <th><span data-t="auto_t_182">Nhà đầu tư</span></th>
@@ -11273,6 +12189,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                     <!-- Billing -->
@@ -11281,7 +12198,8 @@
                             <div class="section-title" style="margin-bottom:0;"><span data-t="auto_t_194">Lịch sử thanh
                                     toán</span></div>
                         </div>
-                        <table class="data-table">
+                        <div class="table-responsive">
+                            <table class="data-table">
                             <thead>
                                 <tr>
                                     <th><span data-t="auto_t_195">Ngày</span></th>
@@ -11314,6 +12232,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -11544,7 +12463,8 @@
                                     (4)</button>
                             </div>
                         </div>
-                        <table class="data-table">
+                        <div class="table-responsive">
+                            <table class="data-table">
                             <thead>
                                 <tr>
                                     <th data-t="auto_ext_511">Tên / Công ty</th>
@@ -11612,6 +12532,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -11952,6 +12873,12 @@
                             cursor: pointer;
                         }
 
+                        .set-tag-group {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 8px;
+                        }
+
                         .set-tag {
                             display: inline-flex;
                             align-items: center;
@@ -12063,7 +12990,7 @@
                     </style>
 
                     <!-- 2-column layout -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+                    <div class="set-main-grid">
 
                         <!-- LEFT COLUMN -->
                         <div>
@@ -12132,7 +13059,7 @@
                                     <div
                                         style="font-size: 11px; color: var(--ink3); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
                                         Preferred Sectors</div>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    <div class="set-tag-group">
                                         <span class="set-tag active"
                                             onclick="this.classList.toggle('active'); this.classList.toggle('inactive')">💳
                                             Fintech</span>
@@ -12158,7 +13085,7 @@
                                     <div
                                         style="font-size: 11px; color: var(--ink3); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
                                         Investment Stage</div>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    <div class="set-tag-group">
                                         <span class="set-tag active"
                                             onclick="this.classList.toggle('active'); this.classList.toggle('inactive')">Pre-seed</span>
                                         <span class="set-tag active"
@@ -12795,7 +13722,7 @@
                 auto_ext_151: "Series A",
                 auto_ext_152: "🧠 97% Match",
                 auto_ext_153: "TechFlow Vietnam",
-                auto_ext_154: "B2B Payment platform for ASEAN SMEs. ARR ₫8.4B. Growth +34% YoY.",
+                auto_ext_154: "B2B Payment platform for SMEs. ARR ₫8.4B. Growth +34% YoY.",
                 auto_ext_155: "Asking",
                 auto_ext_156: "₫25B",
                 auto_ext_157: "Valuation",
@@ -12876,7 +13803,7 @@
                 auto_ext_232: "📊 Dealing Room",
                 auto_ext_233: "Startup (48)",
                 auto_ext_234: "SME (79)",
-                auto_ext_235: "Investor Zone ⭐",
+                auto_ext_235: "Investor Zone",
                 auto_ext_236: "Fintech",
                 auto_ext_237: "SaaS / B2B",
                 auto_ext_238: "Healthcare",
@@ -12915,7 +13842,7 @@
                 auto_ext_271: "Match 87",
                 auto_ext_272: "PRS 76",
                 auto_ext_273: "Connect",
-                auto_ext_274: "🔗 5 connects",
+                auto_ext_274: "5 connects",
                 auto_ext_275: "SM",
                 auto_ext_276: "ShopMate Platform",
                 auto_ext_277: "E-commerce SaaS · Pre-seed · TP.HCM",
@@ -12928,7 +13855,7 @@
                 auto_ext_284: "Match 78",
                 auto_ext_285: "PRS 85",
                 auto_ext_286: "Connect",
-                auto_ext_287: "🔗 2 connects",
+                auto_ext_287: "2 connects",
                 auto_ext_288: "LG",
                 auto_ext_289: "LogiGo Vietnam",
                 auto_ext_290: "Logistics",
@@ -12938,7 +13865,7 @@
                 auto_ext_294: "Match 81",
                 auto_ext_295: "PRS 72",
                 auto_ext_296: "Connect",
-                auto_ext_297: "🔗 4 connects",
+                auto_ext_297: "4 connects",
                 auto_ext_298: "NS",
                 auto_ext_299: "NutrientSpace",
                 auto_ext_300: "F&B",
@@ -12950,7 +13877,7 @@
                 auto_ext_306: "Match 76",
                 auto_ext_307: "PRS 79",
                 auto_ext_308: "Connect",
-                auto_ext_309: "🔗 3 connects",
+                auto_ext_309: "3 connects",
                 auto_ext_310: "BS",
                 auto_ext_311: "BuildSmart JSC",
                 auto_ext_312: "Construction Tech · SME · TP.HCM",
@@ -12963,7 +13890,7 @@
                 auto_ext_319: "Match 72",
                 auto_ext_320: "PRS 88",
                 auto_ext_321: "Connect",
-                auto_ext_322: "🔗 6 connects",
+                auto_ext_322: "6 connects",
                 auto_ext_323: "Fintech",
                 auto_ext_324: "Fintech / Series A",
                 auto_ext_325: "8 High-Confidence matches",
@@ -12991,12 +13918,12 @@
                 auto_ext_347: "Almost Ready",
                 auto_ext_348: "Pitch Deck v2",
                 auto_ext_349: "TT99/2025",
-                auto_ext_350: "👥 Team (20%)",
-                auto_ext_351: "🌍 Market (20%)",
-                auto_ext_352: "📈 Traction (20%)",
-                auto_ext_353: "💰 Financials (20%)",
-                auto_ext_354: "🎯 Use of Funds (20%)",
-                auto_ext_355: "👔 AI C-Suite Console",
+                auto_ext_350: "Team (20%)",
+                auto_ext_351: "Market (20%)",
+                auto_ext_352: "Traction (20%)",
+                auto_ext_353: "Financials (20%)",
+                auto_ext_354: "Use of Funds (20%)",
+                auto_ext_355: "AI C-Suite Console",
                 auto_ext_356: "● Multi-Agent Online",
                 auto_ext_357: "Cash Runway",
                 auto_ext_358: "Monthly Burn Rate",
@@ -13004,10 +13931,10 @@
                 auto_ext_360: "Gross Profit Margin",
                 auto_ext_361: "₫117.6M",
                 auto_ext_362: "₫78.4M",
-                auto_ext_363: "📢 Marketing & Acquisition (18%)",
+                auto_ext_363: "Marketing & Acquisition (18%)",
                 auto_ext_364: "₫50.4M",
                 auto_ext_365: "₫33.6M",
-                auto_ext_366: "🤖 AI Pitch Deck Generator",
+                auto_ext_366: "AI Pitch Deck Generator",
                 auto_ext_367: "● AI Engine v2.1",
                 auto_ext_368: "Model",
                 auto_ext_369: "Team",
@@ -13027,8 +13954,8 @@
                 auto_ext_383: "Jean Kang",
                 auto_ext_384: "✔ Verified VCC",
                 auto_ext_385: "Managing Director @ Viet Capital Partners (VCC)",
-                auto_ext_386: "📍 Ho Chi Minh City, VN",
-                auto_ext_387: "📧 jean.kang@vcc.com",
+                auto_ext_386: "Ho Chi Minh City, VN",
+                auto_ext_387: "jean.kang@vcc.com",
                 auto_ext_388: "Asset Allocation (AUM)",
                 auto_ext_389: "₫12.4B",
                 auto_ext_390: "Active Deal Actions",
@@ -13045,7 +13972,7 @@
                 auto_ext_401: "₫10B - ₫50B",
                 auto_ext_402: "Vietnam, Singapore",
                 auto_ext_403: "VERIFIED",
-                auto_ext_404: "📈 Dashboard",
+                auto_ext_404: "Dashboard",
                 auto_ext_405: "Tổng quan hoạt động ·",
                 auto_ext_406: "LIVE DEALS",
                 auto_ext_407: "MATCHED",
@@ -13060,14 +13987,14 @@
                 auto_ext_416: "New Messages",
                 auto_ext_417: "3 Unread",
                 auto_ext_418: "Action required",
-                auto_ext_419: "🎯 AI Top Picks",
+                auto_ext_419: "AI Top Picks",
                 auto_ext_420: "Raising Capital",
                 auto_ext_421: "SaaS platform optimizing last-mile delivery for 400+ E-commerce companies.",
                 auto_ext_422: "ARR",
                 auto_ext_423: "₫12.4B",
                 auto_ext_424: "Asking",
                 auto_ext_425: "₫25B",
-                auto_ext_426: "🧠 97.4% Match",
+                auto_ext_426: "97.4% Match",
                 auto_ext_427: "Series B",
                 auto_ext_428: "BioCura MedTech",
                 auto_ext_429: "Pre-FDA medical device startup focus on remote heart-rate monitors...",
@@ -13075,7 +14002,7 @@
                 auto_ext_431: "8 Pat.",
                 auto_ext_432: "Round Size",
                 auto_ext_433: "₫80B",
-                auto_ext_434: "🧠 92.1% Match",
+                auto_ext_434: "92.1% Match",
                 auto_ext_435: "🔥 Hottest Deals",
                 auto_ext_436: "VERY HOT (1.2k views)",
                 auto_ext_437: "CryptoGate Payments",
@@ -13084,7 +14011,7 @@
                 auto_ext_440: "PropChain VN",
                 auto_ext_441: "Tokenized real-estate investment portal. License secured. 40k registered users...",
                 auto_ext_442: "Express Interest",
-                auto_ext_443: "🏛 Sector: Fintech",
+                auto_ext_443: "Sector: Fintech",
                 auto_ext_444: "18 Matches",
                 auto_ext_445: "Global Lend Core",
                 auto_ext_446: "Peer-to-peer infrastructure for banks...",
@@ -13096,8 +14023,8 @@
                 auto_ext_452: "TechFlow Vietnam",
                 auto_ext_453: "Series A · ₫45B · Fintech",
                 auto_ext_454: "Live",
-                auto_ext_455: "👁 142 views",
-                auto_ext_456: "🔗 8 connects",
+                auto_ext_455: "142 views",
+                auto_ext_456: "8 connects",
                 auto_ext_457: "BuildSmart JSC",
                 auto_ext_458: "SME · ₫40B · B2B SaaS",
                 auto_ext_459: "Pending Review",
@@ -13122,7 +14049,7 @@
                 auto_ext_478: "Paid",
                 auto_ext_479: "Paid",
                 auto_ext_480: "Paid",
-                auto_ext_481: "🔗 Affiliate Dashboard",
+                auto_ext_481: "Affiliate Dashboard",
                 auto_ext_482: "₫8.4M",
                 auto_ext_483: "₫24.2M",
                 auto_ext_484: "31 SME · 12 Startup · 4 Investor",
@@ -13165,7 +14092,7 @@
                 auto_ext_521: "Angel Investor",
                 auto_ext_522: "Investor",
                 auto_ext_523: "KYC Verified",
-                auto_ext_524: "💬 Private Chat",
+                auto_ext_524: "Private Chat",
                 auto_ext_525: "MC",
                 auto_ext_526: "Mekong Capital",
                 auto_ext_527: "2h",
@@ -13176,8 +14103,8 @@
                 auto_ext_532: "MC",
                 auto_ext_533: "Mekong Capital",
                 auto_ext_534: "● Online · Match Score: 94",
-                auto_ext_535: "📅 Schedule Meeting",
-                auto_ext_536: "🤝 Closed Won",
+                auto_ext_535: "Schedule Meeting",
+                auto_ext_536: "Closed Won",
                 auto_ext_537: "Financial Projections",
                 auto_ext_538: "MC",
                 auto_ext_539: "Hôm qua 16:30",
@@ -13209,7 +14136,7 @@
                 auto_ext_565: "SAFE",
                 auto_ext_566: "Convertible Note",
                 auto_ext_567: "Revenue Share",
-                auto_ext_568: "💳 Listing Fee: ₫2,500,000",
+                auto_ext_568: "Listing Fee: ₫2,500,000",
                 auto_ext_569: "rút *",
                 auto_ext_570: "Vietcombank · ****5678",
                 auto_ext_571: "Techcombank · ****1234",
@@ -13238,31 +14165,31 @@
                 auto_t_016: "Sort: Mới nhất",
                 auto_t_017: "Giai đoạn: Tất cả",
                 auto_t_018: "Áp dụng",
-                auto_t_019: "💾 Lưu bộ lọc",
+                auto_t_019: "Lưu bộ lọc",
                 auto_t_020: "Nền tảng thanh toán B2B cho SME Việt Nam, tích hợp đa ngân hàng và quản lý dòng tiền thời gian thực.",
                 auto_t_021: "Gọi vốn",
-                auto_t_022: "👁 142 lượt xem",
-                auto_t_023: "⏰ còn 141 ngày",
+                auto_t_022: "142 lượt xem",
+                auto_t_023: "còn 141 ngày",
                 auto_t_024: "Healthcare · Seed · Hà Nội",
                 auto_t_025: "Phần mềm quản lý phòng khám và kết nối bác sĩ – bệnh nhân. 240 phòng khám đang dùng tại 12 tỉnh.",
-                auto_t_026: "👁 89 lượt xem",
-                auto_t_027: "⏰ còn 98 ngày",
+                auto_t_026: "89 lượt xem",
+                auto_t_027: "còn 98 ngày",
                 auto_t_028: "All-in-one platform cho nhà bán hàng trên sàn thương mại điện tử: tồn kho, đơn hàng, analytics.",
-                auto_t_029: "👁 63 lượt xem",
-                auto_t_030: "⏰ còn 74 ngày",
+                auto_t_029: "63 lượt xem",
+                auto_t_030: "còn 74 ngày",
                 auto_t_031: "Logistics · Seed · Đà Nẵng",
                 auto_t_032: "Nền tảng giao hàng chặng cuối sử dụng AI tối ưu tuyến đường và kết nối tài xế freelance tại miền Trung.",
                 auto_t_033: "GMV/tháng",
                 auto_t_034: "Tăng trưởng",
-                auto_t_035: "👁 71 lượt xem",
-                auto_t_036: "⏰ còn 112 ngày",
+                auto_t_035: "71 lượt xem",
+                auto_t_036: "còn 112 ngày",
                 auto_t_037: "F&B · Seed · Hà Nội",
                 auto_t_038: "Thực phẩm chức năng cá nhân hóa theo DNA. Đã có 8,500 khách hàng trả phí với tỷ lệ tái mua 74%.",
-                auto_t_039: "👁 58 lượt xem",
-                auto_t_040: "⏰ còn 55 ngày",
+                auto_t_039: "58 lượt xem",
+                auto_t_040: "còn 55 ngày",
                 auto_t_041: "Phần mềm quản lý dự án xây dựng cho nhà thầu vừa và nhỏ. 180 dự án đang sử dụng, tiết kiệm 23% chi phí vận hành.",
-                auto_t_042: "👁 94 lượt xem",
-                auto_t_043: "⏰ còn 167 ngày",
+                auto_t_042: "94 lượt xem",
+                auto_t_043: "còn 167 ngày",
                 auto_t_044: "Hiển thị 6 / 127 deals",
                 auto_t_045: "← Trước",
                 auto_t_046: "Tiếp →",
@@ -13270,15 +14197,15 @@
                 auto_t_048: "Dựa trên mối quan tâm của bạn đối với",
                 auto_t_051: ", chúng tôi đề xuất tăng cường phân bổ nguồn lực vào các startup B2B SaaS có ARR > ₫10B.",
                 auto_t_052: "Hệ thống đánh giá vốn AFS & mức độ sẵn sàng gọi vốn PRS · TechFlow Vietnam",
-                auto_t_053: "📥 Tải báo cáo PDF",
-                auto_t_054: "↻ Chạy lại AI Score",
+                auto_t_053: "Tải báo cáo PDF",
+                auto_t_054: "Chạy lại AI Score",
                 auto_t_055: "Cập nhật",
                 auto_t_056: "Phân tích 3 Trục AFS",
-                auto_t_057: "💰 Tài chính",
+                auto_t_057: "Tài chính",
                 auto_t_058: "Dòng tiền dương, tỷ lệ D/E lành mạnh, tăng trưởng ARR ổn định",
-                auto_t_059: "⚙️ Vận hành",
+                auto_t_059: "Vận hành",
                 auto_t_060: "Vòng quay hàng tồn kho tốt, hiệu suất nhân sự trên trung bình ngành",
-                auto_t_061: "🏢 Đặc điểm",
+                auto_t_061: "Đặc điểm",
                 auto_t_062: "Team chất lượng, lợi thế cạnh tranh rõ ràng, cần mở rộng network đối tác",
                 auto_t_063: "Yếu tố ảnh hưởng lớn nhất đến AFS",
                 auto_t_064: "Tăng trưởng ARR",
@@ -13310,9 +14237,9 @@
                 auto_t_090: "**Đa dạng hóa doanh thu**: Chuyển đổi 20% khách hàng sang gói trả trước theo năm (annual contract) để tối ưu hóa vốn lưu động (working capital).",
                 auto_t_091: "**Tối ưu nợ phải thu**: Thiết lập chiết khấu 1.5% cho các đối tác thanh toán trong vòng 7 ngày để giảm chỉ số Days Sales Outstanding (DSO) xuống dưới 18 ngày.",
                 auto_t_092: "Phân tích Cấu trúc Chi phí Vận hành (OpEx)",
-                auto_t_093: "👥 Quỹ lương Nhân sự (42%)",
-                auto_t_094: "💻 Hạ tầng & SaaS Công nghệ (28%)",
-                auto_t_095: "🏢 Văn phòng & Tiện ích (12%)",
+                auto_t_093: "Quỹ lương Nhân sự (42%)",
+                auto_t_094: "Hạ tầng & SaaS Công nghệ (28%)",
+                auto_t_095: "Văn phòng & Tiện ích (12%)",
                 auto_t_096: "Đánh giá Vận hành của COO Agent System",
                 auto_t_097: "**Tech Stack audit**: Phát hiện 3 license SaaS không sử dụng (Tiết kiệm ₫10.5M/tháng).",
                 auto_t_098: "**HR Utilization**: Hiệu suất nhân sự đạt 78% (Mục tiêu 85%).",
@@ -13334,20 +14261,20 @@
                 auto_t_114: "Quy mô đội ngũ",
                 auto_t_115: "21-50 người",
                 auto_t_116: "Vốn gọi (VNĐ)",
-                auto_t_117: "🤖 Tạo hồ sơ với AI →",
+                auto_t_117: "Tạo hồ sơ với AI →",
                 auto_t_118: "Điền thông tin và nhấn Tạo hồ sơ",
                 auto_t_119: "AI sẽ tự động tạo bộ tài liệu gọi vốn hoàn chỉnh bao gồm Pitch Deck, Business Plan & Financial Projections theo chuẩn quốc tế.",
                 auto_t_120: "Hồ sơ gọi vốn đã tạo thành công!",
                 auto_t_121: "Đáp ứng tiêu chí đánh giá chuẩn quốc tế ILPA v2.0 & TT99/2025",
                 auto_t_122: "Bộ tài liệu đã được khởi tạo:",
                 auto_t_123: "PDF · 2.4MB · Cấu trúc chuẩn gọi vốn",
-                auto_t_124: "🔒 Tải xuống",
+                auto_t_124: "Tải xuống",
                 auto_t_125: "PDF · 380KB · Bản tóm tắt dự án kinh doanh",
                 auto_t_126: "XLSX · 1.2MB · Đầy đủ P&L, Cash Flow",
-                auto_t_127: "🔓 Mở khóa trọn bộ tài liệu (Paywall Export)",
+                auto_t_127: "Mở khóa trọn bộ tài liệu (Paywall Export)",
                 auto_t_128: "Tải xuống toàn bộ file gốc không gắn logo watermark + kèm theo báo cáo chấm điểm AFS chi tiết.",
                 auto_t_129: "Thanh toán ₫990,000 để mở khóa",
-                auto_t_130: "📊 Pitch Deck Analytics (Hoạt động của Nhà đầu tư)",
+                auto_t_130: "Pitch Deck Analytics (Hoạt động của Nhà đầu tư)",
                 auto_t_131: "Theo dõi thời gian xem slide của các quỹ đầu tư (Quét ngẫu nhiên hệ thống)",
                 auto_t_132: "Slide 1-3: Executive Summary (Độ tập trung cao)",
                 auto_t_133: "Tổng số lượt xem: **18 lượt**",
@@ -13372,7 +14299,7 @@
                 auto_t_152: "Định danh nhà đầu tư (KYC/AML)",
                 auto_t_153: "Quét hộ chiếu & pháp nhân tổ chức quốc tế",
                 auto_t_154: "Tổng quan hoạt động · Cập nhật 05/07/2026",
-                auto_t_155: "📥 Export báo cáo",
+                auto_t_155: "Export báo cáo",
                 auto_t_156: "+ Đăng Deal mới",
                 auto_t_157: "AFS Score hiện tại",
                 auto_t_158: "↑ +5 so với tháng trước",
@@ -13382,7 +14309,7 @@
                 auto_t_162: "↑ +3 tuần này",
                 auto_t_163: "Investors đã match",
                 auto_t_164: "Deals đang active",
-                auto_t_165: "⏰ 141 ngày còn lại",
+                auto_t_165: "141 ngày còn lại",
                 auto_t_166: "22% thời gian đã qua · Deadline: 23/11/2026",
                 auto_t_167: "Đang chờ Deal Manager xét duyệt. SLA: còn 18h",
                 auto_t_168: "Hoạt động gần đây",
@@ -13395,7 +14322,7 @@
                 auto_t_175: "Hôm qua 16:32 · \"Cần thêm thông tin về unit economics\"",
                 auto_t_176: "⚡ AFS Score tăng từ 71 → 76",
                 auto_t_177: "3 ngày trước · Sau khi cập nhật BCTC tháng 6",
-                auto_t_178: "🤖 AI Pitch Kit tạo xong hồ sơ mới",
+                auto_t_178: "AI Pitch Kit tạo xong hồ sơ mới",
                 auto_t_179: "5 ngày trước · Pitch Readiness: 82/100",
                 auto_t_180: "Pipeline Nhà Đầu Tư",
                 auto_t_181: "Xem tất cả",
@@ -13419,8 +14346,8 @@
                 auto_t_198: "Listing Fee · TechFlow Vietnam · 180 ngày",
                 auto_t_199: "AFS Report · Báo cáo đầy đủ + XAI PDF",
                 auto_t_200: "Chương trình đối tác · CTV Nguyễn Văn A · Đang hoạt động",
-                auto_t_201: "📥 Xuất báo cáo",
-                auto_t_202: "💸 Yêu cầu rút tiền",
+                auto_t_201: "Xuất báo cáo",
+                auto_t_202: "Yêu cầu rút tiền",
                 auto_t_203: "Tổng hoa hồng (tháng này)",
                 auto_t_204: "↑ +34% so tháng trước",
                 auto_t_205: "Đã chi trả",
@@ -13432,7 +14359,7 @@
                 auto_t_211: "Chia sẻ link để nhận hoa hồng khi user đăng ký và sử dụng dịch vụ",
                 auto_t_212: "Link chính",
                 auto_t_213: "+ Tạo link mới theo chiến dịch",
-                auto_t_214: "💰 Cơ cấu hoa hồng",
+                auto_t_214: "Cơ cấu hoa hồng",
                 auto_t_215: "Hoa hồng theo tháng",
                 auto_t_216: "Phân tích nguồn hoa hồng (tháng này)",
                 auto_t_217: "Tổng tháng này",
@@ -13464,12 +14391,12 @@
                 auto_t_243: "✓ Đã mở",
                 auto_t_244: "Hồ sơ tóm tắt: Business model, Team size, Thị trường",
                 auto_t_245: "Tài liệu chi tiết: Pitch Deck đầy đủ, Financial Projections",
-                auto_t_246: "🔒 Cần Connect",
+                auto_t_246: "Cần Connect",
                 auto_t_247: "Thông tin liên hệ: Email, số điện thoại người đại diện",
-                auto_t_248: "🔒 Sau khi duyệt",
+                auto_t_248: "Sau khi duyệt",
                 auto_t_249: "Vốn gọi",
                 auto_t_250: "Đóng",
-                auto_t_251: "🔗 Gửi Connect Request",
+                auto_t_251: "Gửi Connect Request",
                 auto_t_252: "Gửi Connect Request",
                 auto_t_253: "Deal Manager sẽ xét duyệt request trong ≤4h làm việc",
                 auto_t_254: "Lý do quan tâm (20–200 ký tự) *",
@@ -13497,45 +14424,45 @@
                 auto_t_276: "Số tiền rút *",
                 auto_t_277: "Ngân hàng",
                 auto_t_278: "Xác nhận rút tiền",
-                auto_t_279: "🚀 Đăng ký tài khoản miễn phí!",
-                auto_t_280: "📋 Đăng ký cho Startup/SME...",
-                auto_t_281: "🔍 Khám phá Dealing Room...",
-                auto_t_282: "🔗 Gửi Connect Request...",
-                auto_t_283: "🔍 Chuyển đến Dealing Room...",
-                auto_t_284: "🔗 Cần đăng ký để Connect...",
-                auto_t_285: "⭐ Investor Zone — đăng ký để xem...",
-                auto_t_286: "🚀 Đăng ký Startup/SME...",
-                auto_t_287: "💼 Đăng ký Investor...",
-                auto_t_288: "⚙️ Trang cài đặt đang phát triển...",
+                auto_t_279: "Đăng ký tài khoản miễn phí!",
+                auto_t_280: "Đăng ký cho Startup/SME...",
+                auto_t_281: "Khám phá Dealing Room...",
+                auto_t_282: "Gửi Connect Request...",
+                auto_t_283: "Chuyển đến Dealing Room...",
+                auto_t_284: "Cần đăng ký để Connect...",
+                auto_t_285: "Investor Zone — đăng ký để xem...",
+                auto_t_286: "Đăng ký Startup/SME...",
+                auto_t_287: "Đăng ký Investor...",
+                auto_t_288: "Trang cài đặt đang phát triển...",
                 auto_t_289: "Chi tiết Mandate TechFlow Vietnam...",
                 auto_t_290: "Chi tiết Mandate BioCura MedTech...",
-                auto_t_291: "📝 Gửi yêu cầu truy cập tài liệu mới...",
+                auto_t_291: "Gửi yêu cầu truy cập tài liệu mới...",
                 auto_t_292: "Đang mở xem NDA_TechFlow...",
                 auto_t_293: "Đang truy cập phòng dữ liệu BioCura MedTech...",
-                auto_t_294: "✅ Đã lưu bộ lọc thành công!",
-                auto_t_295: "📥 Đang tải báo cáo PDF tích hợp...",
-                auto_t_296: "🔄 Đang cập nhật chỉ số AFS & PRS từ dữ liệu mới nhất...",
-                auto_t_297: "📤 Đang mở form upload Pitch Deck mới...",
-                auto_t_298: "💼 Đang phân tích tối ưu hợp đồng thuê văn phòng...",
-                auto_t_299: "🤖 COO Agent đang quét lại hệ thống vận hành...",
-                auto_t_300: "🔒 Vui lòng thanh toán để mở khóa tải xuống PDF",
-                auto_t_301: "🔒 Vui lòng thanh toán để mở khóa tải xuống Business Plan",
-                auto_t_302: "🔒 Vui lòng thanh toán để mở khóa mô hình tài chính",
-                auto_t_303: "💳 Đang kết nối cổng thanh toán VNPay...",
+                auto_t_294: "Đã lưu bộ lọc thành công!",
+                auto_t_295: "Đang tải báo cáo PDF tích hợp...",
+                auto_t_296: "Đang cập nhật chỉ số AFS & PRS từ dữ liệu mới nhất...",
+                auto_t_297: "Đang mở form upload Pitch Deck mới...",
+                auto_t_298: "Đang phân tích tối ưu hợp đồng thuê văn phòng...",
+                auto_t_299: "COO Agent đang quét lại hệ thống vận hành...",
+                auto_t_300: "Vui lòng thanh toán để mở khóa tải xuống PDF",
+                auto_t_301: "Vui lòng thanh toán để mở khóa tải xuống Business Plan",
+                auto_t_302: "Vui lòng thanh toán để mở khóa mô hình tài chính",
+                auto_t_303: "Đang kết nối cổng thanh toán VNPay...",
                 auto_t_304: "Yêu cầu ký quỹ thêm đã gửi đến Treasury!",
                 auto_t_305: "Trang rút quỹ đang xử lý...",
-                auto_t_306: "✅ Đã copy link!",
-                auto_t_307: "🔗 Đã tạo link chiến dịch mới!",
-                auto_t_308: "✅ Đã cập nhật Closed Won! Invoice đang được tạo...",
-                auto_t_309: "📎 Chọn file để đính kèm",
-                auto_t_310: "✉️ Tin nhắn đã gửi!",
-                auto_t_311: "✅ Connect Request đã gửi! Deal Manager sẽ xét duyệt trong 4h.",
-                auto_t_312: "💳 Chuyển đến trang thanh toán Listing Fee...",
-                auto_t_313: "✅ Yêu cầu rút tiền đã gửi! Kế Toán sẽ xử lý trong 3–5 ngày.",
-                auto_t_314: "👔 Virtual CFO đang tính toán kịch bản...",
-                auto_t_315: "✅ Kịch bản mô phỏng thành công! Điểm AFS dự kiến đạt ' + afsVal + '/100.",
-                auto_t_316: "🤖 AI đã tạo xong hồ sơ gọi vốn! Pitch Readiness: 82/100",
-                auto_t_317: "🤖 AI đang phân tích dữ liệu doanh nghiệp & benchmark ngành...",
+                auto_t_306: "Đã copy link!",
+                auto_t_307: "Đã tạo link chiến dịch mới!",
+                auto_t_308: "Đã cập nhật Closed Won! Invoice đang được tạo...",
+                auto_t_309: "Chọn file để đính kèm",
+                auto_t_310: "Tin nhắn đã gửi!",
+                auto_t_311: "Connect Request đã gửi! Deal Manager sẽ xét duyệt trong 4h.",
+                auto_t_312: "Chuyển đến trang thanh toán Listing Fee...",
+                auto_t_313: "Yêu cầu rút tiền đã gửi! Kế Toán sẽ xử lý trong 3–5 ngày.",
+                auto_t_314: "Virtual CFO đang tính toán kịch bản...",
+                auto_t_315: "Kịch bản mô phỏng thành công! Điểm AFS dự kiến đạt ' + afsVal + '/100.",
+                auto_t_316: "AI đã tạo xong hồ sơ gọi vốn! Pitch Readiness: 82/100",
+                auto_t_317: "AI đang phân tích dữ liệu doanh nghiệp & benchmark ngành...",
                 auto_t_318: "Đang xây dựng cấu trúc Pitch Deck & kế hoạch tài chính...",
                 auto_t_319: "AI đã tạo xong hồ sơ gọi vốn! Pitch Readiness Score: 82/100",
                 auto_t_320: "Đăng xuất thành công!",
@@ -13550,7 +14477,7 @@
                 verb_partners: "Tìm đối tác chiến lược",
                 verb_investors: "Kết nối nhà đầu tư",
                 hero_desc_main: "Finister kết nối Startup & SME với nhà đầu tư thông qua AI Matching Engine, AI Funding Score và Dealing Room minh bạch. CFO AI của bạn — từ hồ sơ đến giải ngân.",
-                hero_cta_score: "⚡ Chấm điểm AI miễn phí",
+                hero_cta_score: "Chấm điểm AI miễn phí",
                 hero_cta_explore: "Khám phá Deals →",
                 stat_active_deals: "Thương vụ đang hoạt động",
                 stat_raising_capital: "Vốn đang gọi",
@@ -13598,8 +14525,8 @@
                 feat_eyebrow: "Platform Features",
                 feat_title: "Một nền tảng. Hai luồng người dùng.",
                 feat_sub: "Finister phục vụ đồng thời Startup/SME muốn gọi vốn và Investor tìm kiếm cơ hội — với AI làm cầu nối chính xác.",
-                feat_tab_startup: "🏢 Cho Startup / SME",
-                feat_tab_investor: "💼 Cho Nhà đầu tư",
+                feat_tab_startup: "Cho Startup / SME",
+                feat_tab_investor: "Cho Nhà đầu tư",
 
                 feat_title_afs: "AI Funding Score",
                 feat_desc_afs: "Chấm điểm 3 trục — Tài chính, Vận hành, Đặc điểm — với báo cáo XAI giải thích từng yếu tố. Score 0–100, kèm SHAP/LIME explanation.",
@@ -13611,22 +14538,22 @@
                 feat_desc_dealroom: "Deal lên sàn sau khi KYB passed + Deal Manager duyệt. AI Matching tự động tìm Investor phù hợp 24/7.",
                 feat_report_title: "AFS Báo cáo · TechFlow Vietnam",
                 feat_report_ready: "Sẵn sàng gọi vốn",
-                feat_report_fin: "💰 Tài chính",
-                feat_report_ops: "⚙️ Vận hành",
-                feat_report_char: "🏢 Đặc điểm",
-                feat_report_warning: "⚠️ Tỷ lệ CAC/LTV cần tối ưu thêm để tăng điểm lên 85+",
+                feat_report_fin: "Tài chính",
+                feat_report_ops: "Vận hành",
+                feat_report_char: "Đặc điểm",
+                feat_report_warning: "Tỷ lệ CAC/LTV cần tối ưu thêm để tăng điểm lên 85+",
 
                 feat_title_match: "AI Match Feed cá nhân hóa",
                 feat_desc_match: "Feed Deal phù hợp nhất dựa trên investment thesis của bạn — ngành, ticket size, giai đoạn. Match Score 0–100 kèm lý do XAI.",
-                feat_title_zone: "Investor Zone (VIP)",
-                feat_desc_zone: "Showroom cao cấp: Deal AFS cao + Match Score cao + Case Study thành công. UX được thiết kế riêng cho HNW Investor.",
+                feat_title_zone: "Investor Zone",
+                feat_desc_zone: "Deal AFS cao + Match Score cao + Case Study thành công.",
                 feat_title_layered: "Lộ thông tin theo lớp",
                 feat_desc_layered: "Teaser ẩn danh → Hồ sơ tóm tắt → Tài liệu chi tiết (post-Connect) → Thông tin liên hệ. Bảo mật tối đa cho cả hai bên.",
                 feat_title_chat: "Private Chat + Due Diligence",
                 feat_desc_chat: "Cổng trao đổi 1-1 sau khi Connect được duyệt. AI gợi ý DD checklist, ghi nhận meeting timestamp.",
 
                 feat_mock_iz_title: "Investor Zone · Match Feed",
-                feat_mock_top_picks: "🎯 Lựa chọn AI hàng đầu",
+                feat_mock_top_picks: "Lựa chọn AI hàng đầu",
                 feat_mock_b2b: "Nền tảng thanh toán B2B · Series A · ARR ₫8.4B",
                 feat_mock_medtech: "Thiết bị y tế · Growth · 8 Bằng sáng chế",
                 feat_mock_more_deals: "+ 124 cơ hội đầu tư khớp tiêu chí của bạn →",
@@ -13703,9 +14630,9 @@
                 // Chat Widget
                 chat_status: "● Online · Phản hồi ngay",
                 chat_question: "Bạn đang tìm kiếm điều gì trên Finister?",
-                chat_opt_startup: "🏢 Tôi muốn gọi vốn cho startup / SME",
-                chat_opt_investor: "💼 Tôi là nhà đầu tư tìm deal",
-                chat_opt_demo: "🎯 Tôi muốn xem demo sản phẩm",
+                chat_opt_startup: "Tôi muốn gọi vốn cho startup / SME",
+                chat_opt_investor: "Tôi là nhà đầu tư tìm deal",
+                chat_opt_demo: "Tôi muốn xem demo sản phẩm",
                 chat_opt_score: "⚡ Tôi muốn chấm điểm AFS miễn phí",
 
                 // Side bar / App-view items
@@ -13874,14 +14801,14 @@
                 auto_ext_144: "JK",
                 auto_ext_145: "Jean Kang",
                 auto_ext_146: "LP/Verified VCC",
-                auto_ext_147: "🔍 Dealing Room",
+                auto_ext_147: "Dealing Room",
                 auto_ext_148: "Startup (48)",
                 auto_ext_149: "SME (79)",
                 auto_ext_150: "Investor Zone ⭐",
                 auto_ext_151: "Series A",
                 auto_ext_152: "🧠 97% Match",
                 auto_ext_153: "TechFlow Vietnam",
-                auto_ext_154: "B2B Payment platform for ASEAN SMEs. ARR ₫8.4B. Growth +34% YoY.",
+                auto_ext_154: "B2B Payment platform for SMEs. ARR ₫8.4B. Growth +34% YoY.",
                 auto_ext_155: "Asking",
                 auto_ext_156: "₫25B",
                 auto_ext_157: "Valuation",
@@ -13905,7 +14832,7 @@
                 auto_ext_175: "Users",
                 auto_ext_176: "12k",
                 auto_ext_177: "Express Interest",
-                auto_ext_178: "💬 Messenger",
+                auto_ext_178: "Messenger",
                 auto_ext_179: "TechFlow Vietnam",
                 auto_ext_180: "10:42 AM",
                 auto_ext_181: "We've sent the DD reports...",
@@ -13918,7 +14845,7 @@
                 auto_ext_188: "Thanks! I'll review them by tomorrow afternoon.",
                 auto_ext_189: "Great. Let me know if you need anything else.",
                 auto_ext_190: "Send",
-                auto_ext_191: "📤 Your Mandates",
+                auto_ext_191: "Your Mandates",
                 auto_ext_192: "DEAL NAME",
                 auto_ext_193: "STAGE",
                 auto_ext_194: "STATUS",
@@ -14633,7 +15560,7 @@
                 nav_testimonials: "Case Studies",
                 nav_login: "Login",
                 nav_start_free: "Start Free",
-                hero_title_prefix: "AI Platform for",
+                hero_title_prefix: "AI Platform",
                 verb_fundraising: "Smart Fundraising",
                 verb_partners: "Strategic Partnership",
                 verb_investors: "Investor Access",
@@ -15349,6 +16276,145 @@
             el.style.transition = 'opacity .5s ease, transform .5s ease';
             io.observe(el);
         });
+        /* ── MOBILE RESPONSIVE JAVASCRIPT ── */
+
+        // ── Landing page hamburger ──
+        function toggleMobileNav() {
+            const btn = document.getElementById('nav-hamburger');
+            const drawer = document.getElementById('nav-mobile-drawer');
+            if (!btn || !drawer) return;
+            btn.classList.toggle('open');
+            drawer.classList.toggle('open');
+        }
+
+        function mobileNavGo(id) {
+            toggleMobileNav();
+            const el = document.querySelector(id);
+            if (el) {
+                setTimeout(() => {
+                    const offset = 80;
+                    const pos = el.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: pos, behavior: 'smooth' });
+                }, 180);
+            }
+        }
+
+        // ── Investor sidebar toggle (mobile) ──
+        function toggleSidebar() {
+            const sidebar = document.getElementById('app-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (!sidebar) return;
+            const isOpen = sidebar.classList.contains('sidebar-open');
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('sidebar-open');
+                if (overlay) overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('app-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (sidebar) sidebar.classList.remove('sidebar-open');
+            if (overlay) overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ── Mobile bottom nav routing ──
+        function mobileNav(pageName, el) {
+            // Update active state on bottom nav items
+            document.querySelectorAll('.mbn-item').forEach(i => i.classList.remove('active'));
+            if (el) el.classList.add('active');
+
+            // Route to the correct page
+            // goInvestorPage navigates investor pages (inv-page-*)
+            // Check which system the page belongs to
+            const invPageEl = document.getElementById('inv-page-' + pageName);
+            const appPageEl = document.getElementById('app-page-' + pageName);
+
+            if (invPageEl) {
+                // find corresponding sidebar nav-link and use goInvestorPage
+                const sideLink = Array.from(document.querySelectorAll('#app-view .nav-link'))
+                    .find(n => n.getAttribute('onclick')?.includes(`'${pageName}'`));
+                goInvestorPage(pageName, sideLink || null);
+            } else if (appPageEl) {
+                showAppPage(pageName, null);
+            }
+
+            closeSidebar();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── Inject topbar-menu-btn into every .topbar in app-view ──
+        document.addEventListener('DOMContentLoaded', function () {
+            const appView = document.getElementById('app-view');
+            if (!appView) return;
+
+            appView.querySelectorAll('.topbar').forEach(topbar => {
+                // Avoid duplicate injection
+                if (topbar.querySelector('.topbar-menu-btn')) return;
+                const menuBtn = document.createElement('button');
+                menuBtn.className = 'topbar-menu-btn';
+                menuBtn.title = 'Menu';
+                menuBtn.innerHTML = '☰';
+                menuBtn.onclick = toggleSidebar;
+                // Insert as first child of topbar
+                topbar.insertBefore(menuBtn, topbar.firstChild);
+            });
+
+            // Also inject for the inv-pages container topbars
+            const invPages = document.getElementById('investor-pages');
+            if (invPages) {
+                invPages.querySelectorAll('.topbar').forEach(topbar => {
+                    if (topbar.querySelector('.topbar-menu-btn')) return;
+                    const menuBtn = document.createElement('button');
+                    menuBtn.className = 'topbar-menu-btn';
+                    menuBtn.title = 'Menu';
+                    menuBtn.innerHTML = '☰';
+                    menuBtn.onclick = toggleSidebar;
+                    topbar.insertBefore(menuBtn, topbar.firstChild);
+                });
+            }
+        });
+
+        // ── Close mobile nav drawer when clicking outside ──
+        document.addEventListener('click', function (e) {
+            const drawer = document.getElementById('nav-mobile-drawer');
+            const hamburger = document.getElementById('nav-hamburger');
+            if (drawer && drawer.classList.contains('open')) {
+                if (!drawer.contains(e.target) && e.target !== hamburger && !hamburger?.contains(e.target)) {
+                    toggleMobileNav();
+                }
+            }
+        });
+
+        // ── Sync mobile bottom nav active state with goInvestorPage ──
+        const _origGoInvestorPage = window.goInvestorPage;
+        // patch after DOM ready
+        document.addEventListener('DOMContentLoaded', function () {
+            const pageToMbn = {
+                'dashboard': 'mbn-dashboard',
+                'dealroom': 'mbn-dealroom',
+                'messages-inv': 'mbn-messages-inv',
+                'score': 'mbn-score',
+            };
+            // Override goInvestorPage to also sync bottom nav
+            const origFn = goInvestorPage;
+            window.goInvestorPage = function (name, el) {
+                origFn(name, el);
+                // Sync bottom nav
+                document.querySelectorAll('.mbn-item').forEach(i => i.classList.remove('active'));
+                const mbnId = pageToMbn[name];
+                if (mbnId) {
+                    const mbnEl = document.getElementById(mbnId);
+                    if (mbnEl) mbnEl.classList.add('active');
+                }
+                closeSidebar();
+            };
+        });
+
     </script>
 
 </body>
