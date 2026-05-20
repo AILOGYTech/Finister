@@ -1,0 +1,449 @@
+USER JOURNEYS — PHASE 1
+4.1  Startup Gọi Vốn
+B.
+Hành động
+Hệ thống phản hồi
+Điều kiện nhánh
+1
+Đăng ký + xác thực email
+Tạo account, OTP, status = Unverified
+Email tồn tại → báo lỗi
+2
+Upload Pitch Deck → Pitch Readiness Score
+AI phân tích 5 chiều ≤30s. Score + Feedback. Score <65: gợi ý dùng Pitch Kit
+Thiếu slide bắt buộc → cảnh báo cụ thể
+3
+Dùng AI Pitch Kit wizard
+AI tạo Deck + Plan + Projections ≤60s. Tự động chạy lại Readiness Score
+Thiếu field bắt buộc → inline error
+4
+Thanh toán mở Export PDF
+Redirect cổng thanh toán. Webhook → Unlock Download
+Fail payment → giữ locked, toast lỗi
+5
+Nộp hồ sơ KYB + Submit Deal
+Status = Pending Review. Notification Deal Manager
+Thiếu docs → Incomplete
+6
+KYB xác minh
+OCR + AML ≤24h. Email kết quả
+KYB Fail → Rejected + lý do
+7
+Deal Manager duyệt lên sàn
+Status = Verified + Live. Countdown 180 ngày. AI Matching kích hoạt
+Reject → comment, Startup nhận notification
+8
+Nhận Connect từ Investor
+Private Chat 1-1 sau Deal Manager duyệt
+Investor rút → Chat đóng, status Withdrawn
+9
+Xác nhận Closed Won
+Success Fee tính + Invoice. After-Deal workflow trigger
+Tranh chấp → Deal Manager review
+4.2  Investor Tìm Deal
+B.
+Hành động
+Hệ thống phản hồi
+Điều kiện nhánh
+1
+Đăng ký + KYC
+Upload CCCD/Passport. AML screening ≤24h
+Fail KYC → reject + lý do, không vào Dealing Room
+2
+Điền Investment Thesis
+Ngành, ticket size, giai đoạn. AI Match Feed cá nhân hóa ngay
+Chưa điền → nhắc nhở nhận recommendations
+3
+Vào Dealing Room: AI Deal Feed
+View mặc định: AI-curated Feed, sort Match Score. Badge Match Score + AFS inline. Tooltip XAI "Tại sao phù hợp?"
+Không có Deal đủ ngưỡng → Coming Soon
+4
+Lọc & tìm Deal
+Filter ngành/AFS/Match Score. Teaser ẩn danh → Xem thêm → Hồ sơ tóm tắt
+Không kết quả → gợi ý bỏ bớt filter
+5
+Connect vào Deal
+Notification Startup + Deal Manager queue
+Deal Manager reject → email lý do cho Investor
+6
+Private Chat + Due Diligence
+Chat mở. Nhận full Pitch Deck + Pitch Readiness Score + AI checklist
+Timeout 48h duyệt → auto-escalate Super Admin
+7
+Xác nhận Closed Won / Pass
+Closed Won → After-Deal. Pass → Deal vẫn live 180 ngày
+—
+4.3  SME & AI Funding Score
+B.
+Hành động
+Hệ thống phản hồi
+Điều kiện nhánh
+1
+Tạo account SME Owner + sub-account Data Staff
+RBAC: Data Staff chỉ quyền upload BCTC
+—
+2
+Data Staff upload BCTC (PDF/Excel)
+OCR trích xuất. Validation chuẩn kế toán TT200/TT133/TT99
+OCR fail → hướng dẫn cụ thể, upload lại
+3
+AI chấm điểm AFS 3 trục
+Score 0–100 + SHAP/LIME report ≤60s. Preview miễn phí, full report sau thanh toán
+Dữ liệu thiếu → Score kèm cảnh báo
+4
+Thanh toán Listing Fee → Submit
+Vào queue Deal Manager. AFS xuất sắc → auto-highlight vào Investor Zone
+Re-upload BCTC sau 30 ngày → BR-16 flag
+4.4  After-Deal (Hậu Deal Thành Công)
+B.
+Hành động
+Hệ thống phản hồi
+Điều kiện nhánh
+1
+Closed Won xác nhận 2 phía
+Hệ thống sinh hợp đồng từ template chuẩn. Notification ký cho cả 2 bên
+Thiếu xác nhận 1 bên → reminder 24h, escalate 48h
+2
+Startup + Investor ký điện tử
+E-signing 2 phía. Hợp đồng lưu Document Repository
+Quá 48h chưa ký → Deal Manager alert
+3
+Deal Manager cài Milestone
+Danh sách milestone + deadline. Startup đề xuất, Deal Manager duyệt
+—
+4
+Startup gửi báo cáo định kỳ
+Upload báo cáo. AI tóm tắt executive summary → gửi Investor
+Quá hạn: D-3/D-1/D+1 reminder. D+7 → Deal Manager
+5
+Investor nhận Update Report
+Email + in-app. Dashboard portfolio tự động cập nhật
+Chưa xem 7 ngày → push reminder
+6
+Hệ thống theo dõi Milestone
+Cảnh báo D-14, D-7. Flag milestone trễ sau deadline
+Milestone trễ → Deal Manager alert, Investor thông báo
+5
+FUNCTIONAL REQUIREMENTS — PHASE 1
+MH = Must Have  |  SH = Should Have  |  CH = Could Have
+5.1  Verify User (KYB / KYC)
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-01
+KYB Doanh nghiệp
+OCR xác thực GPKD, MST, đại diện pháp lý. AML screening. Kết quả ≤24h. Điều kiện bắt buộc để Deal lên sàn.
+Business
+MH
+FR-02
+KYC Nhà đầu tư
+Xác minh danh tính CCCD/Passport + AML screening nguồn tiền. Kết quả ≤24h.
+Business
+MH
+FR-03
+Điều kiện lên sàn
+Chỉ Deal "Verified" hiển thị Dealing Room. Deal Manager phê duyệt cuối cùng. Enforce 3 điều kiện BR-02.
+Business
+MH
+FR-04
+Data Masking BCTC
+Field-level encryption AES-256 cho dữ liệu tài chính. Dev/IT Admin không xem raw BCTC ở bất kỳ môi trường nào.
+Technical
+MH
+FR-05
+Notification kết quả Verify
+Email + in-app: Approved / Rejected / Cần bổ sung. Rejected phải kèm lý do cụ thể và link hướng dẫn.
+App
+SH
+5.2  AI Seach Engine 
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-06
+Multi-dimensional Matching
+Phân tích 5 chiều: (1) Founder background & track record, (2) Team composition, (3) Investor portfolio history & thesis, (4) Product metrics & traction, (5) Thematic fit (NLP). Match Score 0–100 cho mỗi cặp Deal–Investor.
+App
+MH
+FR-07
+Match Score + XAI tooltip
+Match Score badge hiển thị inline trên mỗi Deal card. Tooltip "Tại sao phù hợp?" → top 3 lý do từ SHAP values (ví dụ: "Ngành Fintech khớp thesis. Ticket $500K trong range. Traction 150% MoM — top 10%").
+Business
+MH
+FR-08
+AI Deal Feed (view mặc định)
+Trang chủ Investor sau login mặc định là AI-curated Deal Feed: cá nhân hóa theo investment thesis, sort theo Match Score. Phân mục: "Dành riêng cho bạn" / "Deal nổi bật" / "Mới lên sàn".
+App
+MH
+FR-09
+Investor Match Digest
+Email digest (daily/weekly tùy setting): top 5 Deal phù hợp nhất theo thesis, kèm Match Score và lý do ngắn.
+App
+SH
+FR-10
+Founder Investor Discovery
+Startup xem Investor phù hợp nhất kèm Match Score. Gửi "Interest Signal" để Deal Manager duyệt.
+App
+SH
+FR-11
+Behavioral Signal Tracking
+Theo dõi: Investor xem slide nào lâu nhất, quay lại deal nào. Tín hiệu cải thiện thuật toán liên tục.
+App
+SH
+FR-11A
+Match Quality Feedback Loop
+Sau mỗi Connect: feedback 2 phía (match tốt/không phù hợp). Dữ liệu cải thiện model.
+App
+CH
+5.3  Pitch Readiness Score
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-12
+Pitch Deck Analysis Engine
+Upload Pitch Deck (PDF/PPT) → AI phân tích 5 chiều: Team (20%) + Market (20%) + Traction (20%) + Financials (20%) + Use of Funds (20%).
+App
+MH
+FR-13
+Readiness Score 0–100
+Score tổng + breakdown từng chiều + radar chart. Thang: <40 Not Ready, 40–65 Needs Work, 65–80 Almost Ready, >80 Fundraising Ready.
+App
+MH
+FR-14
+Actionable Feedback Report
+Từng vấn đề phát hiện + gợi ý cải thiện cụ thể có thể thực hiện ngay.
+Business
+MH
+FR-15
+Deck Analytics (Investor View)
+Sau Deal live: tracker Investor xem slide nào và dừng bao lâu. Founder nhận insight.
+App
+SH
+5.4  Dealing Room
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-17
+AI Deal Feed + Default View
+View mặc định Investor: AI-curated list theo thesis, sort Match Score. Badge Match Score + AFS inline. Phân mục đa dạng. Nhất quán với FR-08.
+Business
+MH
+FR-18
+Hiển thị Deal Teaser
+List Deal Verified: Match Score badge, AFS badge, Sector tag, vốn gọi, giai đoạn. Tên/logo ẩn danh đến khi Investor xác nhận quan tâm.
+Business
+MH
+FR-19
+Bộ lọc đa lớp + AI Sort
+Filter: ngành, vốn gọi, AFS score, Match Score, giai đoạn. Sort: Match Score (default) / AFS / vốn gọi / ngày lên sàn.
+App
+MH
+FR-20
+XAI Tooltip trên Deal Card
+Hover/tap badge "Tại sao phù hợp?" → Tooltip top 3 lý do AI match với ngôn ngữ tự nhiên, cụ thể, không technical.
+App
+MH
+FR-21
+Lộ thông tin theo lớp
+Tier 1: Teaser ẩn danh → Tier 2: Hồ sơ tóm tắt → Tier 3: Tài liệu chi tiết (sau Connect) → Tier 4: Thông tin liên hệ (sau Deal Manager duyệt).
+Business
+MH
+FR-22
+Connect Request
+Investor Connect → Startup notification → Deal Manager duyệt → mở Private Chat 1-1.
+Business
+MH
+FR-23
+Private Chat 1-1
+Chat sau Connect được duyệt. Lưu lịch sử. File sharing. AI gợi ý checklist due diligence theo loại meeting.
+App
+MH
+FR-24
+Ghi nhận Meeting
+Meeting timestamp + AI checklist nội dung theo loại (intro/deep-dive/term sheet).
+App
+SH
+5.5  Investor Zone
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-25
+Showroom Deal xuất sắc
+Hiển thị Deal AFS cao + Match Score cao. UX sang trọng dành cho HNW Investor.
+Business
+MH
+FR-26
+Case Study thành công
+Admin ghim case study thực tế kèm số liệu cụ thể. Hiển thị trước khi giải thích sản phẩm.
+Business
+MH
+FR-27
+Auto-highlight Deal nổi bật
+Tự động vào Investor Zone: Deal AFS cao + Match Score ≥ ngưỡng Deal Manager cài đặt.
+App
+SH
+5.6  AI Pitch Kit
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-28
+Input Wizard
+Form thu thập: ý tưởng, mô hình, team, thị trường, vốn gọi. Validation inline. Progress bar.
+Business
+MH
+FR-29
+Auto-generate Pitch Deck
+AI tạo Pitch Deck chuẩn (Problem/Solution/Market/Team/Financials) ≤60s.
+App
+MH
+FR-30
+Financial Projections 3 năm
+AI tạo dự phóng P&L, Cash Flow, Balance Sheet 3 năm từ assumption đầu vào.
+App
+MH
+FR-31
+Chuẩn hóa ILPA v2.0
+Output theo ILPA Reporting Standard v2.0 và chuẩn kế toán hiện hành.
+Business
+MH
+FR-32
+Paywall Export
+Nút "Tải PDF" khóa mặc định. Unlock sau Webhook xác nhận payment_status = SUCCESS.
+Business
+MH
+5.7  AI Funding Score (AFS)
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-33
+OCR Báo cáo Tài chính
+Đọc và trích xuất dữ liệu BCTC PDF/image. Hỗ trợ chuẩn TT200/TT133/TT99.
+App
+MH
+FR-34
+Chấm điểm 3 trục
+Đặc điểm (ngành, nhân sự, lịch sử) + Tài chính (dòng tiền, nợ, lợi nhuận) + Vận hành (tồn kho, hiệu suất).
+App
+MH
+FR-35
+XAI Report (SHAP/LIME)
+Mỗi kết quả kèm SHAP/LIME: chỉ rõ yếu tố kéo điểm lên/xuống với tỷ trọng cụ thể. Bắt buộc theo BR-10.
+App
+MH
+FR-36
+Ngưỡng lọc + Paywall
+Deal Manager cài ngưỡng AFS theo sector. Deal dưới ngưỡng → Pending. Báo cáo chi tiết unlock sau thanh toán.
+Business
+MH
+FR-37
+Anti-Gaming Detection
+Re-upload BCTC trong 30 ngày (BR-16). Kiểm tra tính nhất quán nội tại dữ liệu tài chính (BR-17). Flag tự động.
+App
+MH
+5.8  Billing & Payment
+Loại cổng thanh toán xác định trong giai đoạn triển khai. Webhook callback bắt buộc với mọi cổng.
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-38
+Tích hợp cổng thanh toán
+Kết nối qua API tiêu chuẩn. Webhook callback tức thì. Retry mechanism khi fail. Hỗ trợ các phương thức phổ biến (xác định trong triển khai).
+Integration
+MH
+FR-39
+Paywall & Unlock Logic
+Khóa Export/Download mặc định. Mở khóa chỉ khi Webhook xác nhận payment_status = SUCCESS.
+App
+MH
+FR-40
+Listing Fee & Countdown
+Thu phí lên sàn. Countdown Tracker 180 ngày từ khi Deal live. Hiển thị số ngày còn lại.
+Business
+MH
+FR-41
+Refund Logic
+Hết 180 ngày, Connect = 0 → push thông báo Kế Toán + Owner để đối soát hoàn tiền theo chính sách.
+Business
+MH
+FR-42
+Success Fee & Invoicing
+Closed Won xác nhận 2 phía: tính % Success Fee, tự động sinh Invoice PDF, gửi email thanh toán.
+Business
+MH
+FR-43
+Transaction History
+Lịch sử đầy đủ cho user. Dashboard doanh thu cho Super Admin và Kế Toán.
+App
+MH
+FR-44
+Affiliate Payout
+Đối soát và chi trả hoa hồng Affiliate theo kỳ tháng/quý, trong 7 ngày đầu kỳ tiếp theo.
+Business
+SH
+5.9  After-Deal Contract & Tracking
+FR
+Tiêu đề
+Mô tả
+Loại
+MoSCoW
+FR-45
+Contract Generation
+Sau Closed Won xác nhận 2 phía: hệ thống sinh hợp đồng điện tử từ template chuẩn (Pháp Chế phê duyệt). Điền sẵn: số vốn, tỷ lệ, milestone, lịch báo cáo. Notification ký 2 bên.
+App
+MH
+FR-46
+E-Signing Workflow
+Ký điện tử 2 phía: Startup ký trước → Investor ký sau. Notification từng bước. Hợp đồng lưu Document Repository cả 2 bên. Tích hợp dịch vụ e-signing (xác định trong triển khai).
+App
+MH
+FR-47
+Contract Clause Library
+Thư viện điều khoản chuẩn hóa: protective clauses, anti-dilution, liquidation preference, reporting obligation. Deal Manager chọn ghép khi tạo hợp đồng.
+Business
+SH
+FR-48
+Milestone Setup & Tracking
+Cài đặt danh sách milestone: tên + KPI đo lường + deadline. Tracking tự động. Cảnh báo D-14, D-7. Flag milestone trễ sau deadline.
+App
+MH
+FR-49
+Post-Deal Status Update
+Startup upload báo cáo định kỳ: doanh thu, burn rate, KPI, milestone. AI tóm tắt thành executive summary ≤300 từ. Lưu Document Repository.
+App
+MH
+FR-50
+Investor Update Report
+Investor nhận email + in-app khi có báo cáo mới. Report: AI summary + KPI trend chart + milestone status. Portfolio dashboard tự động cập nhật.
+App
+MH
+FR-51
+Document Repository
+Kho lưu hợp đồng, báo cáo, biên bản. Phân quyền theo role. Lưu trữ tối thiểu 5 năm. Không xóa trước hạn.
+App
+SH
+FR-52
+Automated Reminder & Alert
+Nhắc nhở: báo cáo đến hạn (D-3, D-1), hợp đồng chưa ký (D+1, D+3), milestone sắp đến hạn (D-14, D-7). Alert Deal Manager khi cần can thiệp.
+App
+MH
+FR-53
+After-Deal Analytics Dashboard
+Investor: ROI tracking, milestone completion rate, portfolio health score, so sánh deal. Startup: investor engagement level, report compliance score.
+App
+SH
+6

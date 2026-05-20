@@ -227,6 +227,88 @@
             border: 1px solid rgba(14, 165, 160, .2)
         }
 
+        .landing-disclosure {
+            padding: 22px 0 10px;
+        }
+
+        .landing-disclosure-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 20px;
+            border: 1px solid var(--border2);
+            background: linear-gradient(180deg, rgba(17, 29, 51, .92), rgba(11, 22, 41, .78));
+            backdrop-filter: blur(18px);
+            border-radius: 18px;
+            box-shadow: 0 18px 42px rgba(0, 0, 0, .24)
+        }
+
+        .landing-disclosure-copy {
+            max-width: 520px;
+        }
+
+        .landing-disclosure-kicker {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold2);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .landing-disclosure-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .landing-disclosure-sub {
+            font-size: 13px;
+            color: var(--ink2);
+        }
+
+        .landing-disclosure-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .landing-disclosure-btn {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border2);
+            background: rgba(255, 255, 255, .03);
+            color: var(--ink2);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s ease;
+            white-space: nowrap;
+        }
+
+        .landing-disclosure-btn:hover {
+            color: var(--ink);
+            background: rgba(255, 255, 255, .07);
+            transform: translateY(-1px);
+        }
+
+        .landing-disclosure-btn.active {
+            color: var(--navy);
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            border-color: transparent;
+            box-shadow: 0 12px 28px rgba(212, 168, 67, .26);
+        }
+
+        [data-landing-group][hidden] {
+            display: none !important;
+        }
+
         /* ══ NAV ══ */
         .nav {
             position: fixed;
@@ -8167,6 +8249,28 @@
                 </div>
             </section>
 
+            <!-- ══ LANDING DISCLOSURE ══ -->
+            <div class="landing-disclosure">
+                <div class="container">
+                    <div class="landing-disclosure-bar">
+                        <div class="landing-disclosure-copy">
+                            <div class="landing-disclosure-kicker">Progressive Disclosure</div>
+                            <div class="landing-disclosure-title">Xem tổng quan trước, mở sâu từng lớp khi cần</div>
+                            <div class="landing-disclosure-sub">Giao diện này giữ nguyên toàn bộ nội dung gốc nhưng chỉ
+                                mở đúng cụm thông tin theo ngữ cảnh để trang gọn hơn và dễ đọc hơn.</div>
+                        </div>
+                        <div class="landing-disclosure-actions">
+                            <button class="landing-disclosure-btn active" data-panel="overview"
+                                onclick="switchLandingPanel('overview', this)">Tổng quan</button>
+                            <button class="landing-disclosure-btn" data-panel="product"
+                                onclick="switchLandingPanel('product', this)">Sản phẩm</button>
+                            <button class="landing-disclosure-btn" data-panel="proof"
+                                onclick="switchLandingPanel('proof', this)">Bằng chứng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- ══ HIGHLIGHT BAND ══ -->
             <div class="highlight-band">
                 <div class="hb-track" id="hb-track">
@@ -8348,7 +8452,7 @@
             </div>
 
             <!-- ══ CASE STUDIES ══ -->
-            <section class="section" id="cases">
+            <section class="section" id="cases" data-landing-group="overview">
                 <div class="container">
                     <div class="section-header">
                         <div class="section-eyebrow" data-t="cases_eyebrow">Deal Intelligence</div>
@@ -8476,7 +8580,7 @@
             </section>
 
             <!-- ══ STATS BAR ══ -->
-            <div class="stats-bar">
+            <div class="stats-bar" data-landing-group="overview">
                 <div class="container">
                     <div class="stats-inner">
                         <div class="stat-item">
@@ -8505,7 +8609,7 @@
             </div>
 
             <!-- ══ FEATURES TABS ══ -->
-            <section class="section" id="features">
+            <section class="section" id="features" data-landing-group="product" hidden>
                 <div class="container">
                     <div class="section-header centered">
                         <div class="section-eyebrow" data-t="feat_eyebrow">Platform Features</div>
@@ -8764,7 +8868,7 @@
             </section>
 
             <!-- ══ STATS BAR 2 - How it works ══ -->
-            <section class="section" id="how" style="padding-top:0">
+            <section class="section" id="how" style="padding-top:0" data-landing-group="product" hidden>
                 <div class="container">
                     <div class="section-header centered">
                         <div class="section-eyebrow" data-t="how_eyebrow">Process</div>
@@ -8802,7 +8906,7 @@
             </section>
 
             <!-- ══ DEALS PREVIEW ══ -->
-            <section class="section" id="deals" style="background:var(--navy2);padding:80px 0">
+            <section class="section" id="deals" style="background:var(--navy2);padding:80px 0" data-landing-group="product" hidden>
                 <div class="container">
                     <div class="two-col-header">
                         <div>
@@ -8935,7 +9039,7 @@
             </section>
 
             <!-- ══ TESTIMONIALS ══ -->
-            <section class="section" id="testimonials">
+            <section class="section" id="testimonials" data-landing-group="proof" hidden>
                 <div class="container">
                     <div class="section-header centered">
                         <div class="section-eyebrow" data-t="testi_eyebrow">Deal Makers</div>
@@ -9000,6 +9104,8 @@
 
             <!-- ══ COMPLIANCE STRIP ══ -->
             <div
+                data-landing-group="proof"
+                hidden
                 style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 0">
                 <div class="container">
                     <div style="display:flex;flex-direction:column;align-items:center;gap:16px;justify-content:center">
@@ -9022,7 +9128,7 @@
             </div>
 
             <!-- ══ CTA ══ -->
-            <section class="cta-section">
+            <section class="cta-section" data-landing-group="proof" hidden>
                 <div class="cta-bg"></div>
                 <div class="container">
                     <div class="cta-inner">
@@ -9043,7 +9149,7 @@
             </section>
 
             <!-- ══ FOOTER ══ -->
-            <footer class="footer">
+            <footer class="footer" data-landing-group="proof" hidden>
                 <div class="container">
                     <div class="footer-grid">
                         <div class="footer-brand">
@@ -11783,7 +11889,6 @@
                         </div>
                         <div class="card"
                             style="background:linear-gradient(135deg, rgba(16,185,129,0.1), transparent); border: 1px solid rgba(16,185,129,0.2); padding:20px; margin-bottom: 0;">
-                            <div style="font-size:24px; margin-bottom:12px;">🤝</div>
                             <div style="font-size:11px; color:var(--ink3); text-transform:uppercase; font-weight:700;"
                                 data-t="auto_ext_411">
                                 NDAs đang hoạt động</div>
@@ -11794,7 +11899,6 @@
                         </div>
                         <div class="card"
                             style="background:linear-gradient(135deg, rgba(212,168,67,0.1), transparent); border: 1px solid rgba(212,168,67,0.2); padding:20px; margin-bottom: 0;">
-                            <div style="font-size:24px; margin-bottom:12px;">⚡</div>
                             <div style="font-size:11px; color:var(--ink3); text-transform:uppercase; font-weight:700;"
                                 data-t="auto_ext_414">
                                 Đang chờ phản hồi</div>
@@ -11804,7 +11908,6 @@
                         </div>
                         <div class="card"
                             style="background:linear-gradient(135deg, rgba(139,92,246,0.1), transparent); border: 1px solid rgba(139,92,246,0.2); padding:20px; margin-bottom: 0;">
-                            <div style="font-size:24px; margin-bottom:12px;">💬</div>
                             <div style="font-size:11px; color:var(--ink3); text-transform:uppercase; font-weight:700;"
                                 data-t="auto_ext_416">
                                 Tin nhắn mới</div>
@@ -11825,6 +11928,7 @@
                             <div class="deal-card-lux">
                                 <div class="deal-label-row"><span class="deal-type type-raise" data-t="auto_ext_420">Huy
                                         động vốn</span><span class="deal-rank">1</span></div>
+                                <h3 data-t="auto_ext_4201">KKR Vietnam</h3>
                                 <div class="deal-desc" data-t="auto_ext_421">Nền tảng SaaS tối ưu hóa giao hàng chặng
                                     cuối cho hơn
                                     400 công ty thương mại điện tử.</div>
@@ -11860,7 +11964,32 @@
                                         </div>
                                     </div>
                                     <div class="deal-footer">
-                                        <div class="ai-match-chip" data-t="auto_ext_434">🧠 92.1% Match</div>
+                                        <div class="ai-match-chip" data-t="auto_ext_434">🧠 94% Match</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="deal-card-lux">
+                                <div class="deal-info">
+                                    <div class="deal-label-row"><span class="deal-type type-raise"
+                                            data-t="auto_ext_420">Gọi vốn</span><span class="deal-rank">3</span></div>
+                                    <h3 data-t="auto_ext_4202">Dragon Capital</h3>
+                                    <p class="deal-desc">Dragon Capital (DC) là một trong những công ty quản lý tài
+                                        sản lớn nhất Việt Nam. Được thành lập vào năm 1994, DC đã đầu tư vào
+                                        hơn 180 công ty tại hơn 12 quốc gia và hiện đang quản lý tài sản trị giá khoảng
+                                        2,2 tỷ USD.
+                                    </p>
+                                    <div class="deal-stats">
+                                        <div class="ds-item">
+                                            <div class="dl">AUM</div>
+                                            <div class="dv">2.2 tỷ USD</div>
+                                        </div>
+                                        <div class="ds-item">
+                                            <div class="dl">Gọi vốn</div>
+                                            <div class="dv">2.2 tỷ USD</div>
+                                        </div>
+                                    </div>
+                                    <div class="deal-footer">
+                                        <div class="ai-match-chip" data-t="auto_ext_434">🧠 97.4% Match</div>
                                     </div>
                                 </div>
                             </div>
@@ -11891,6 +12020,16 @@
                                     người dùng đã đăng ký...</p>
                                 <div style="font-family:var(--font-mono); font-size:24px; margin-bottom:12px;">
                                     $4,500,000</div>
+                                <button class="btn btn-ghost" style="width:100%; justify-content:center;"
+                                    data-t="auto_ext_442">Quan tâm</button>
+                            </div>
+                            <div class="deal-card-lux" style="background:var(--navy);">
+                                <h3 data-t="auto_ext_4401">LogiGo Vietnam</h3>
+                                <p class="deal-desc" data-t="auto_ext_4411">Nền tảng SaaS tối ưu hóa việc giao hàng
+                                    chặng
+                                    cuối cho hơn 400 công ty thương mại điện tử.</p>
+                                <div style="font-family:var(--font-mono); font-size:24px; margin-bottom:12px;">
+                                    $4,000,000</div>
                                 <button class="btn btn-ghost" style="width:100%; justify-content:center;"
                                     data-t="auto_ext_442">Quan tâm</button>
                             </div>
@@ -11928,6 +12067,19 @@
                                     <div style="font-weight:700; color:var(--blue-light); font-size:13px; margin-top:4px;"
                                         data-t="auto_ext_450">
                                         ₫12,000,000,000 Seeking</div>
+                                </div>
+                            </div>
+                            <div class="deal-card-lux" style="display:flex; gap:20px; align-items:center;">
+                                <div
+                                    style="width:80px; height:80px; background:var(--navy3); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px;">
+                                    🔐</div>
+                                <div style="flex:1;">
+                                    <h4 style="margin-bottom:4px;" data-t="auto_ext_448">BuildSmart JSC</h4>
+                                    <p style="font-size:12px; color:var(--ink3);" data-t="auto_ext_4491">Nền tảng quản
+                                        lý dự án cho ngành xây dựng, giúp tăng năng suất lao động 30%.</p>
+                                    <div style="font-weight:700; color:var(--blue-light); font-size:13px; margin-top:4px;"
+                                        data-t="auto_ext_450">
+                                        ₫40,000,000,000 Seeking</div>
                                 </div>
                             </div>
                         </div>
@@ -13985,6 +14137,8 @@
                 auto_ext_418: "Cần hành động",
                 auto_ext_419: "Đề xuất hàng đầu AI",
                 auto_ext_420: "Gọi vốn",
+                auto_ext_4201: "KKR Vietnam",
+                auto_ext_4202: "Dragon Capital",
                 auto_ext_421: "Nền tảng SaaS tối ưu hóa việc giao hàng chặng cuối cho hơn 400 công ty thương mại điện tử.",
                 auto_ext_422: "ARR",
                 auto_ext_423: "₫12.4B",
@@ -14003,10 +14157,12 @@
                 auto_ext_436: "RẤT HOT (1.2k lượt xem)",
                 auto_ext_437: "CryptoGate Payments",
                 auto_ext_438: "Dịch vụ cổng fiat phát triển nhanh nhất ở Đông Nam Á. Mandate mua lại đối tác chiến lược...",
-                auto_ext_439: "Bày tỏ sự quan tâm",
+                auto_ext_439: "Quan tâm",
                 auto_ext_440: "PropChain VN",
                 auto_ext_441: "Cổng đầu tư bất động sản token hóa. Đã bảo mật giấy phép. 40k người dùng đã đăng ký...",
-                auto_ext_442: "Bày tỏ sự quan tâm",
+                auto_ext_4401: "LogiGo Vietnam",
+                auto_ext_4411: "Nền tảng SaaS tối ưu hóa việc giao hàng chặng cuối cho hơn 400 công ty thương mại điện tử.",
+                auto_ext_442: "Quan tâm",
                 auto_ext_443: "Ngành: Fintech",
                 auto_ext_444: "18 Matches",
                 auto_ext_445: "Global Lend Core",
@@ -14014,6 +14170,8 @@
                 auto_ext_447: "Cần huy động ₫45,000,000,000",
                 auto_ext_448: "Cyper-Safe Insurance",
                 auto_ext_449: "Bảo hiểm công nghệ cho người giám sát tiền điện tử...",
+                auto_ext_4481: "BuildSmart JSC",
+                auto_ext_4491: "Nền tảng quản lý dự án cho ngành xây dựng, giúp tăng năng suất lao động 30%.",
                 auto_ext_450: "Cần huy động ₫12,000,000,000",
                 auto_ext_451: "Match Score ≥ 70",
                 auto_ext_452: "TechFlow Vietnam",
@@ -15071,6 +15229,8 @@
                 auto_ext_418: "Action required",
                 auto_ext_419: "🎯 AI Top Picks",
                 auto_ext_420: "Raising Capital",
+                auto_ext_4201: "KKR Vietnam",
+                auto_ext_4202: "Dragon Capital",
                 auto_ext_421: "SaaS platform optimizing last-mile delivery for 400+ E-commerce companies.",
                 auto_ext_422: "ARR",
                 auto_ext_423: "₫12.4B",
@@ -16044,6 +16204,8 @@
             // Show landing page view
             document.getElementById('landing-view').style.display = 'block';
             document.body.classList.add('is-landing');
+            const overviewBtn = document.querySelector('.landing-disclosure-btn[data-panel="overview"]');
+            if (overviewBtn) switchLandingPanel('overview', overviewBtn);
 
             // Clear active highlights
             document.querySelectorAll('#app-view .nav-link').forEach(n => n.classList.remove('active'));
@@ -16140,6 +16302,17 @@
             if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
         });
 
+        function switchLandingPanel(name, el) {
+            const buttons = document.querySelectorAll('.landing-disclosure-btn');
+            buttons.forEach(btn => btn.classList.toggle('active', btn === el || btn.dataset.panel === name));
+
+            document.querySelectorAll('[data-landing-group]').forEach(block => {
+                block.hidden = block.getAttribute('data-landing-group') !== name;
+            });
+
+            document.body.dataset.landingPanel = name;
+        }
+
         function scrollToL(id) {
             const el = document.querySelector(id);
             if (el) {
@@ -16201,6 +16374,13 @@
         function scrollTo(id) {
             const el = document.querySelector(id);
             if (el) {
+                const panelHost = el.closest('[data-landing-group]');
+                if (panelHost) {
+                    const panelName = panelHost.getAttribute('data-landing-group');
+                    const panelBtn = document.querySelector('.landing-disclosure-btn[data-panel="' + panelName + '"]');
+                    if (panelName) switchLandingPanel(panelName, panelBtn);
+                }
+
                 const offset = 80;
                 const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
                 const offsetPosition = elementPosition - offset;
